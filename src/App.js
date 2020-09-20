@@ -12,6 +12,10 @@ const App = () => {
         <Router basename={process.env.PUBLIC_URL}>
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/syllabus" component={Home} />
+            <PrivateRoute exact path="/questions" component={Home} />
+            <PrivateRoute exact path="/data" component={Home} />
+
             <Route path="/login" component={Login} />
           </Switch>
         </Router>

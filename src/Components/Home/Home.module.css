@@ -1,1 +1,166 @@
-/* No CSS *//*# sourceMappingURL=Home.module.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+:root {
+  --fixedWidth: 70%;
+  --primaryColor: #473bf0;
+}
+
+body {
+  background: rgba(245, 245, 245, 0.8);
+}
+
+.circularProgress svg {
+  color: var(--orangeTint) !important;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: var(--fixedWidth);
+  margin: auto;
+  min-height: 100vh;
+}
+
+.btn {
+  background: var(--primaryColor) !important;
+}
+
+.innerContainer {
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+.control {
+  min-height: 70vh !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.control .questions,
+.control .syllabus,
+.control .data,
+.control .settings,
+.control .tools {
+  width: 80%;
+  margin: 0 auto;
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.control .questions h3,
+.control .syllabus h3,
+.control .data h3,
+.control .settings h3,
+.control .tools h3 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  margin-left: 15px;
+}
+
+.control .questions svg,
+.control .syllabus svg,
+.control .data svg,
+.control .settings svg,
+.control .tools svg {
+  fill: rgba(0, 0, 0, 0.4);
+}
+
+.control .questions {
+  margin-top: 30px;
+}
+
+.control .profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.control .tools {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-top: 20px;
+}
+
+.control .tools p {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.control .tools .settings {
+  padding: 0;
+  margin-top: 15px;
+}
+
+.control .selected {
+  background: #e4e2f7c5;
+  border-radius: 5px;
+}
+
+.control .selected h3 {
+  color: var(--primaryColor);
+}
+
+.control .selected svg {
+  fill: var(--primaryColor) !important;
+}
+
+.details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  padding: 50px;
+  background: #f4f3ffc5;
+}
+/*# sourceMappingURL=Home.module.css.map */

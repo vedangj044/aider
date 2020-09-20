@@ -34,7 +34,7 @@ form {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 20px;
 
     .btn {
       background: var(--primaryColor) !important;
@@ -48,4 +48,7 @@ form {
       color: rgba(0, 0, 0, 0.6);
     }
   }
+}
+.progress {
+  padding: 10px 0;
 }

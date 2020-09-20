@@ -2,14 +2,14 @@ import React, { useState, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./Login.module.css";
 import firebase from "../../Auth/Firebase";
-import { Paper, TextField, Button } from "@material-ui/core";
+import { Paper, TextField, Button, LinearProgress } from "@material-ui/core";
 import { AuthContext } from "../../Auth/Auth";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  const { currentUser } = useContext(AuthContext);
+  //   const { currentUser } = useContext(AuthContext);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -26,9 +26,9 @@ const Login = ({ history }) => {
     }
   };
 
-  if (currentUser) {
-    history.push("/");
-  }
+  //   if (!currentUser) {
+  //     history.push("/");
+  //   }
 
   return (
     <div className={styles.container}>

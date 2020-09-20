@@ -100,7 +100,7 @@ form .submitBtn {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .formContainer .submitBtn .btn,
@@ -116,5 +116,9 @@ form .submitBtn p {
   font-size: 0.8rem;
   cursor: pointer;
   color: rgba(0, 0, 0, 0.6);
+}
+
+.progress {
+  padding: 10px 0;
 }
 /*# sourceMappingURL=Login.module.css.map */
