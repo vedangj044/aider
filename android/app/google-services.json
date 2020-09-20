@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "297471107724",
+    "firebase_url": "https://aarambh-aider.firebaseio.com",
+    "project_id": "aarambh-aider",
+    "storage_bucket": "aarambh-aider.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297471107724:android:e5036f3d4fb57dda0c91a9",
+        "android_client_info": {
+          "package_name": "com.aider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297471107724-ptt9n5vgtvlkc2o4pltph8lof6pgf0i8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aider",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "297471107724-0p0b9gb59k7sh3kem58j3hhkcj8cgsjd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEcAKkdrtr6jw6gFlozn-6dntjgUPgUCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297471107724-0p0b9gb59k7sh3kem58j3hhkcj8cgsjd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

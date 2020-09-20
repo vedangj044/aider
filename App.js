@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Home from "./src/screens/Home";
 import Feeds from "./src/screens/Feeds";
 import Splash from "./src/screens/Splash";
+import Register from "./src/screens/Register";
 
 const DrawerNavigator = createDrawerNavigator({
   Feeds: {
@@ -50,7 +51,8 @@ const AppNavigator = createStackNavigator(
 );
 
 const AppSwitchNavigator = createSwitchNavigator({
-  Splash: { screen: Splash },
+  // Splash: { screen: Splash },
+  Register: { screen: Register},
   AppNavigator: { screen: AppNavigator },
 });
 
