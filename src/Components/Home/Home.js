@@ -11,10 +11,18 @@ import { Settings } from "@material-ui/icons";
 import classNames from "classnames";
 
 const Home = ({ history }) => {
-  switch (history.location.pathname) {
-  }
-
-  console.log(history);
+  const CurrentComponent = () => {
+    switch (history.location.pathname) {
+      case "/questions":
+        return <QuestionsComponent />;
+      case "/syllabus":
+        return <SyllabusComponent />;
+      case "/data":
+        return <DataComponent />;
+      default:
+        return <QuestionsComponent />;
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -74,7 +82,9 @@ const Home = ({ history }) => {
             </div>
           </Grid>
           <Grid item md={9}>
-            <div className={styles.details}>Hello2</div>
+            <div className={styles.details}>
+              <CurrentComponent />
+            </div>
           </Grid>
         </Grid>
       </Paper>
@@ -83,3 +93,15 @@ const Home = ({ history }) => {
 };
 
 export default withRouter(Home);
+
+const QuestionsComponent = () => {
+  return <div>Hello</div>;
+};
+
+const SyllabusComponent = () => {
+  return <div>Hello Syllabus</div>;
+};
+
+const DataComponent = () => {
+  return <div>Hello Data</div>;
+};
