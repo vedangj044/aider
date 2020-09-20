@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from flaskthreads import AppContextThread
 from tokenizer import extractor, reader
 from findContent import getContent
+import pyrebase
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = '/uploadsFlask'
@@ -15,6 +16,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 db = SQLAlchemy(app)
 
 CORS(app, resources={r"/*": {"origins": "*"}})
+
+configFirebase = eval(open("key.txt", "r").read())
 
 class subject(db.Model):
     __tablename__ = 'subject'
@@ -52,6 +55,9 @@ def syllabus():
         db.session.commit()
 
         g.file = file.filename
+        g.year_ = year
+        g.subject_ = subject__
+        g.branch_ = branch
 
         theard_  = AppContextThread(target = updateSyllabusToFirebase)
         theard_.start()
@@ -61,15 +67,22 @@ def syllabus():
 def updateSyllabusToFirebase():
     text = extractor(reader(g.file).full_text).final_list
 
+    db = firebase.database()
+
     l = []
     for i in text:
         topics = i.split(",")
         for j in topics:
-            l.append(getContent(j).summary)
+            te = getContent(j)
+            data = {"topic": j, "isVideo": te.isVideo, "summary": te.summary}
+            db.child("syllabus").child(g.year_).child(g.branch_).child(g.subject_).push(data)
+            l.append(te.summary)
 
     with open("new.txt", "w") as outfile:
         outfile.write("\n".join(i for i in l))
+    print("DONE!!")
 
 if __name__ == "__main__":
     db.create_all()
+    firebase = pyrebase.initialize_app(configFirebase)
     app.run(debug=True)
