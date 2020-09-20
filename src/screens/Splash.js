@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
-export default class Splash extends Component {
-  async componentDidMount() {
-    const data = await this.navigateToHome();
-    if (data !== null) {
-      this.props.navigation.navigate("Home");
-    }
-  }
 
+export default class Splash extends Component {
   navigateToHome = async () => {
     const TIME = 2000; // Duration of splash screen visibility
     const wait = (time) => new Promise((resolve) => setTimeout(resolve, time));

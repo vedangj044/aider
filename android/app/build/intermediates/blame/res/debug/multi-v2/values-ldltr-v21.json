@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\MedicapsHack\\aider\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
+            "outputFile": "/home/friday/aider/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\dhana\\.gradle\\caches\\transforms-2\\files-2.1\\e4043c6e9a4c8e695eae8f7aedd8cb7b\\appcompat-1.1.0\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "source": "/home/friday/.gradle/caches/transforms-2/files-2.1/e4043c6e9a4c8e695eae8f7aedd8cb7b/appcompat-1.1.0/res/values-ldltr-v21/values-ldltr-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

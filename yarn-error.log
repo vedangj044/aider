@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js install
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add @react-native-community/AsyncStorage
 
 PATH: 
   /usr/lib/jvm/java-11-openjdk-amd64/bin:/home/friday/.local/bin:/usr/lib/jvm/java-11-openjdk-amd64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/ssl/bin:/snap/bin:/home/friday/Android/Sdk/emulator:/home/friday/Android/Sdk/tools:/home/friday/Android/Sdk/tools/bin:/home/friday/Android/Sdk/platform-tools:/home/friday/Android/tools:/home/friday/Android/platform-tools
@@ -14,7 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  Error: ENOENT: no such file or directory, copyfile '/home/friday/.cache/yarn/v6/npm-decode-uri-component-0.2.0-eb3913333458775cb84cd1a1fae062106bb87545-integrity/node_modules/decode-uri-component/index.js' -> '/home/friday/aider/node_modules/decode-uri-component/index.js'
+  Error: https://registry.yarnpkg.com/@react-native-community%2fAsyncStorage: Not found
+      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66947:18)
+      at Request.self.callback (/usr/share/yarn/lib/cli.js:140665:22)
+      at Request.emit (events.js:311:20)
+      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141637:10)
+      at Request.emit (events.js:311:20)
+      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141559:12)
+      at Object.onceWrapper (events.js:417:28)
+      at IncomingMessage.emit (events.js:323:22)
+      at endReadableNT (_stream_readable.js:1204:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
 
 npm manifest: 
   {
@@ -34,10 +44,13 @@ npm manifest:
       "react": "16.13.1",
       "react-native": "0.63.2",
       "react-native-gesture-handler": "^1.8.0",
+      "react-native-google-signin": "^2.1.1",
+      "react-native-image-slider-box": "^1.0.12",
       "react-native-reanimated": "^1.13.0",
       "react-native-safe-area-context": "^3.1.8",
       "react-native-screens": "^2.11.0",
       "react-native-snap-carousel": "^3.9.1",
+      "react-native-stories-view": "^1.0.6",
       "react-native-swipe-gestures": "^1.0.5",
       "react-native-swipe-image": "^1.1.0",
       "react-native-vector-icons": "^7.1.0",
@@ -1113,7 +1126,7 @@ Lockfile:
       hermes-profile-transformer "^0.0.6"
       ip "^1.1.5"
   
-  "@react-native-community/cli-platform-android@^4.13.0", "@react-native-community/cli-platform-android@^4.7.0":
+  "@react-native-community/cli-platform-android@^4.13.0", "@react-native-community/cli-platform-android@^4.5.1", "@react-native-community/cli-platform-android@^4.7.0":
     version "4.13.0"
     resolved "https://registry.yarnpkg.com/@react-native-community/cli-platform-android/-/cli-platform-android-4.13.0.tgz#922681ec82ee1aadd993598b814df1152118be02"
     integrity sha512-3i8sX8GklEytUZwPnojuoFbCjIRzMugCdzDIdZ9UNmi/OhD4/8mLGO0dgXfT4sMWjZwu3qjy45sFfk2zOAgHbA==
@@ -1129,7 +1142,7 @@ Lockfile:
       slash "^3.0.0"
       xmldoc "^1.1.2"
   
-  "@react-native-community/cli-platform-ios@^4.7.0":
+  "@react-native-community/cli-platform-ios@^4.5.0", "@react-native-community/cli-platform-ios@^4.7.0":
     version "4.13.0"
     resolved "https://registry.yarnpkg.com/@react-native-community/cli-platform-ios/-/cli-platform-ios-4.13.0.tgz#a738915c68cac86df54e578b59a1311ea62b1aef"
     integrity sha512-6THlTu8zp62efkzimfGr3VIuQJ2514o+vScZERJCV1xgEi8XtV7mb/ZKt9o6Y9WGxKKkc0E0b/aVAtgy+L27CA==
@@ -1173,7 +1186,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@react-native-community/cli-types/-/cli-types-4.10.1.tgz#d68a2dcd1649d3b3774823c64e5e9ce55bfbe1c9"
     integrity sha512-ael2f1onoPF3vF7YqHGWy7NnafzGu+yp88BbFbP0ydoCP2xGSUzmZVw0zakPTC040Id+JQ9WeFczujMkDy6jYQ==
   
-  "@react-native-community/cli@^4.7.0":
+  "@react-native-community/cli@^4.5.1", "@react-native-community/cli@^4.7.0":
     version "4.13.0"
     resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-4.13.0.tgz#04d5032f9b2b423c61ceef6be83b1bcc8a37db75"
     integrity sha512-R+1VehIQ6VTLf+e7YOwzJk0F9tstfeSC4xy7oT6GSgB3FnXbTJGHFUp4siyO68Ae/gzGqt8SiUO145teWkP+ZA==
@@ -2777,6 +2790,13 @@ Lockfile:
       resolve "^1.17.0"
       string.prototype.matchall "^4.0.2"
   
+  eslint-plugin-relay@1.4.1:
+    version "1.4.1"
+    resolved "https://registry.yarnpkg.com/eslint-plugin-relay/-/eslint-plugin-relay-1.4.1.tgz#5af2ac13e24bd01ad17b6a4014204918d65021cd"
+    integrity sha512-yb+p+4AxZTi2gXN7cZRfXMBFlRa5j6TtiVeq3yHXyy+tlgYNpxi/dDrP1+tcUTNP9vdaJovnfGZ5jp6kMiH9eg==
+    dependencies:
+      graphql "^14.0.0"
+  
   eslint-scope@^5.0.0, eslint-scope@^5.1.0:
     version "5.1.1"
     resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-5.1.1.tgz#e786e59a66cb92b3f6c1fb0d508aab174848f48c"
@@ -3360,6 +3380,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
     integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
   
+  graphql@^14.0.0:
+    version "14.7.0"
+    resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.7.0.tgz#7fa79a80a69be4a31c27dda824dc04dac2035a72"
+    integrity sha512-l0xWZpoPKpppFzMfvVyFmp9vLN7w/ZZJPefUicMCepfJeQ8sMcztloGYY9DfjVPo6tIUDzU5Hw3MUbIjj9AVVA==
+    dependencies:
+      iterall "^1.2.2"
+  
   growly@^1.3.0:
     version "1.3.0"
     resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
@@ -3437,6 +3464,11 @@ Lockfile:
     integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
     dependencies:
       function-bind "^1.1.1"
+  
+  hermes-engine@~0.4.0:
+    version "0.4.3"
+    resolved "https://registry.yarnpkg.com/hermes-engine/-/hermes-engine-0.4.3.tgz#1754932f989daddd149172600f01e69cb8f27298"
+    integrity sha512-qkk85ezG+w70C3tQ4iDs22B8talvByGeJQ1VIb2KG5+rMZWVizRq6r+NYptOC/HWAFxkdYb6F3OPca7RxvjYew==
   
   hermes-engine@~0.5.0:
     version "0.5.1"
@@ -3913,6 +3945,11 @@ Lockfile:
     dependencies:
       html-escaper "^2.0.0"
       istanbul-lib-report "^3.0.0"
+  
+  iterall@^1.2.2:
+    version "1.3.0"
+    resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.3.0.tgz#afcb08492e2915cbd8a0884eb93a8c94d0d72fea"
+    integrity sha512-QZ9qOMdF+QLHxy1QIpUHUU1D5pS2CG2P69LF6L6CPjPYA/XMOmKV3PZpawHoAjHNyB0swdVTRxdYT4tbBbxqwg==
   
   jest-changed-files@^26.3.0:
     version "26.3.0"
@@ -4975,6 +5012,17 @@ Lockfile:
       "@babel/template" "^7.0.0"
       react-refresh "^0.4.0"
   
+  metro-react-native-babel-transformer@0.58.0, metro-react-native-babel-transformer@^0.58.0:
+    version "0.58.0"
+    resolved "https://registry.yarnpkg.com/metro-react-native-babel-transformer/-/metro-react-native-babel-transformer-0.58.0.tgz#5da0e5a1b83c01d11626905fa59f34fda53a21a5"
+    integrity sha512-3A73+cRq1eUPQ8g+hPNGgMUMCGmtQjwqHfoG1DwinAoJ/kr4WOXWWbGZo0xHJNBe/zdHGl0uHcDCp2knPglTdQ==
+    dependencies:
+      "@babel/core" "^7.0.0"
+      babel-preset-fbjs "^3.3.0"
+      metro-babel-transformer "0.58.0"
+      metro-react-native-babel-preset "0.58.0"
+      metro-source-map "0.58.0"
+  
   metro-react-native-babel-transformer@0.59.0:
     version "0.59.0"
     resolved "https://registry.yarnpkg.com/metro-react-native-babel-transformer/-/metro-react-native-babel-transformer-0.59.0.tgz#9b3dfd6ad35c6ef37fc4ce4d20a2eb67fabbb4be"
@@ -4985,17 +5033,6 @@ Lockfile:
       metro-babel-transformer "0.59.0"
       metro-react-native-babel-preset "0.59.0"
       metro-source-map "0.59.0"
-  
-  metro-react-native-babel-transformer@^0.58.0:
-    version "0.58.0"
-    resolved "https://registry.yarnpkg.com/metro-react-native-babel-transformer/-/metro-react-native-babel-transformer-0.58.0.tgz#5da0e5a1b83c01d11626905fa59f34fda53a21a5"
-    integrity sha512-3A73+cRq1eUPQ8g+hPNGgMUMCGmtQjwqHfoG1DwinAoJ/kr4WOXWWbGZo0xHJNBe/zdHGl0uHcDCp2knPglTdQ==
-    dependencies:
-      "@babel/core" "^7.0.0"
-      babel-preset-fbjs "^3.3.0"
-      metro-babel-transformer "0.58.0"
-      metro-react-native-babel-preset "0.58.0"
-      metro-source-map "0.58.0"
   
   metro-resolver@0.58.0, metro-resolver@^0.58.0:
     version "0.58.0"
@@ -5907,7 +5944,7 @@ Lockfile:
       fbjs "^0.8.4"
       object-assign "^4.1.0"
   
-  react-devtools-core@^4.6.0:
+  react-devtools-core@^4.0.6, react-devtools-core@^4.6.0:
     version "4.8.2"
     resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-4.8.2.tgz#4465f2e8de7795564aa20f28b2f3a9737586db23"
     integrity sha512-3Lv3nI8FPAwKqUco35oOlgf+4j8mgYNnIcDv2QTfxEqg2G69q17ZJ8ScU9aBnymS28YC1OW+kTxLmdIQeTN8yg==
@@ -5945,6 +5982,18 @@ Lockfile:
       invariant "^2.2.4"
       prop-types "^15.7.2"
   
+  react-native-google-signin@^2.1.1:
+    version "2.1.1"
+    resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-2.1.1.tgz#4281940eee88602b0181dd49affdf8c92980c85c"
+    integrity sha512-6l3fiLdX/bfhh0BoxGq+jGkagFsO+mrE/eRV4+3/0k8+FDxO90vdPpQdDiwlM5vWXRxWthTzMM09/jHw+4cvNw==
+  
+  react-native-image-slider-box@^1.0.12:
+    version "1.0.12"
+    resolved "https://registry.yarnpkg.com/react-native-image-slider-box/-/react-native-image-slider-box-1.0.12.tgz#4abb7b6d26f12859ac059d4fe7555c72a201e23a"
+    integrity sha512-Yq7xLmrAxNWjSAZJ78ZQkg13/30UJc17yvBwRFAidGrMaVo2Go9glRdRJ2U212APsQVHskAhSgW6YHinuTLoIA==
+    dependencies:
+      react-native-snap-carousel "*"
+  
   react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.2.1:
     version "1.2.1"
     resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
@@ -5974,13 +6023,21 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.11.0.tgz#34b30b07c2d04aa100cba984b944b303bfa43ea6"
     integrity sha512-vJzJE3zI1XUtqthrX3Dh2TBQWB+xFyaGhF52KBq9FjJUN5ws4xpLZJxBWa1KbGV3DilmcSZ4jmZR5LGordwE7w==
   
-  react-native-snap-carousel@^3.9.1:
+  react-native-snap-carousel@*, react-native-snap-carousel@^3.9.1:
     version "3.9.1"
     resolved "https://registry.yarnpkg.com/react-native-snap-carousel/-/react-native-snap-carousel-3.9.1.tgz#6fd9bd8839546c2c6043a41d2035afbc6fe0443e"
     integrity sha512-xWEGusacIgK1YaDXLi7Gao2+ISLoGPVEBR8fcMf4tOOJQufutlNwkoLu0l6B8Qgsrre0nTxoVZikRgGRDWlLaQ==
     dependencies:
       prop-types "^15.6.1"
       react-addons-shallow-compare "15.6.2"
+  
+  react-native-stories-view@^1.0.6:
+    version "1.0.6"
+    resolved "https://registry.yarnpkg.com/react-native-stories-view/-/react-native-stories-view-1.0.6.tgz#c856d4286a2153cc7f208563973022c1ff1e2b98"
+    integrity sha512-r+0mXkPrV6LJVUtFMjfhLtLAfLp5G2+LhNapTWVC+UbJzw+iBOIjbVS54nR49Zw1fxSN/PWA/W9EQyJSWtICSQ==
+    dependencies:
+      react "16.11.0"
+      react-native "0.62.1"
   
   react-native-swipe-gestures@^1.0.5:
     version "1.0.5"
@@ -6005,6 +6062,43 @@ Lockfile:
       lodash.template "^4.5.0"
       prop-types "^15.7.2"
       yargs "^15.0.2"
+  
+  react-native@0.62.1:
+    version "0.62.1"
+    resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.62.1.tgz#fd0324bedf4c3237c928de582c29403f1e46ea80"
+    integrity sha512-EhTmCYsLfIfyLAa6cuJBGgpTPj9LHiCS7fhCKMJZJ4p38+j4NOY4+Z40s/gbZIHr91j1DPNiomsBltQMUdd23g==
+    dependencies:
+      "@babel/runtime" "^7.0.0"
+      "@react-native-community/cli" "^4.5.1"
+      "@react-native-community/cli-platform-android" "^4.5.1"
+      "@react-native-community/cli-platform-ios" "^4.5.0"
+      abort-controller "^3.0.0"
+      anser "^1.4.9"
+      base64-js "^1.1.2"
+      connect "^3.6.5"
+      create-react-class "^15.6.3"
+      escape-string-regexp "^1.0.5"
+      eslint-plugin-relay "1.4.1"
+      event-target-shim "^5.0.1"
+      fbjs "^1.0.0"
+      fbjs-scripts "^1.1.0"
+      hermes-engine "~0.4.0"
+      invariant "^2.2.4"
+      jsc-android "^245459.0.0"
+      metro-babel-register "0.58.0"
+      metro-react-native-babel-transformer "0.58.0"
+      metro-source-map "0.58.0"
+      nullthrows "^1.1.1"
+      pretty-format "^24.7.0"
+      promise "^7.1.1"
+      prop-types "^15.7.2"
+      react-devtools-core "^4.0.6"
+      react-refresh "^0.4.0"
+      regenerator-runtime "^0.13.2"
+      scheduler "0.17.0"
+      stacktrace-parser "^0.1.3"
+      use-subscription "^1.0.0"
+      whatwg-fetch "^3.0.0"
   
   react-native@0.63.2:
     version "0.63.2"
@@ -6082,6 +6176,15 @@ Lockfile:
     dependencies:
       raf "^3.1.0"
       tween-functions "^1.0.1"
+  
+  react@16.11.0:
+    version "16.11.0"
+    resolved "https://registry.yarnpkg.com/react/-/react-16.11.0.tgz#d294545fe62299ccee83363599bf904e4a07fdbb"
+    integrity sha512-M5Y8yITaLmU0ynd0r1Yvfq98Rmll6q8AxaEe88c8e7LxO8fZ2cNgmFt0aGAS9wzf1Ao32NKXtCl+/tVVtkxq6g==
+    dependencies:
+      loose-envify "^1.1.0"
+      object-assign "^4.1.1"
+      prop-types "^15.6.2"
   
   react@16.13.1:
     version "16.13.1"
@@ -6410,6 +6513,14 @@ Lockfile:
     integrity sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==
     dependencies:
       xmlchars "^2.2.0"
+  
+  scheduler@0.17.0:
+    version "0.17.0"
+    resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.17.0.tgz#7c9c673e4ec781fac853927916d1c426b6f3ddfe"
+    integrity sha512-7rro8Io3tnCPuY4la/NuI5F2yfESpnfZyT6TtkXnSWVkcu0BCDJ+8gk5ozUaFaxpIyNuWAPXrH0yFcSi28fnDA==
+    dependencies:
+      loose-envify "^1.1.0"
+      object-assign "^4.1.1"
   
   scheduler@0.19.1, scheduler@^0.19.1:
     version "0.19.1"

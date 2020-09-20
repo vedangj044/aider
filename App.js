@@ -13,6 +13,7 @@ import Home from "./src/screens/Home";
 import Feeds from "./src/screens/Feeds";
 import Splash from "./src/screens/Splash";
 import Register from "./src/screens/Register";
+import Profile from "./src/screens/Profile";
 
 const DrawerNavigator = createDrawerNavigator({
   Feeds: {
@@ -31,6 +32,9 @@ const AppNavigator = createStackNavigator(
         headerShown: false,
       },
     },
+    Register: { screen: Register },
+    Profile: { screen: Profile },
+    Splash: { screen: Splash },
     Feeds: {
       screen: DrawerNavigator,
       navigationOptions: ({ navigation }) => ({
@@ -52,7 +56,7 @@ const AppNavigator = createStackNavigator(
 
 const AppSwitchNavigator = createSwitchNavigator({
   // Splash: { screen: Splash },
-  Register: { screen: Register},
+  Register: { screen: Register },
   AppNavigator: { screen: AppNavigator },
 });
 

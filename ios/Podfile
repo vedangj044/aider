@@ -20,6 +20,10 @@ target 'Aider' do
 
   pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
+
+
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'AiderTests' do
     inherit! :complete
     # Pods for testing
