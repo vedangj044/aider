@@ -3,16 +3,19 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styles from "./App.module.css";
 import { Home, Login } from "./Components";
 import PrivateRoute from "./Auth/PrivateRoute";
+import { AuthProvider } from "./Auth/Auth";
 
 const App = () => {
   return (
     <div className={styles.container}>
-      <Router basename={process.env.PUBLIC_URL}>
-        <Switch>
-          <PrivateRoute exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-        </Switch>
-      </Router>
+      <AuthProvider>
+        <Router basename={process.env.PUBLIC_URL}>
+          <Switch>
+            <PrivateRoute exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+          </Switch>
+        </Router>
+      </AuthProvider>
     </div>
   );
 };
