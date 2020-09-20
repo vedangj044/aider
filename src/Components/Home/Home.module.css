@@ -175,4 +175,87 @@ body {
   padding: 50px;
   background: #f4f3ffc5;
 }
+
+/*Questions Component*/
+.questionCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 20px;
+  position: relative;
+}
+
+.questionCard h4 {
+  font-size: 1rem;
+  color: var(--primaryColor);
+}
+
+.questionCard h5 {
+  font-size: 0.8rem;
+  color: green;
+}
+
+.questionCard .options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+  padding: 15px 0;
+}
+
+.questionCard .options .option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.questionCard .options .option p {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.questionCard .options .option p:nth-child(2) {
+  font-weight: 600;
+}
+
+.questionCard .deleteBtn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.questionCard .deleteBtn svg {
+  fill: rgba(0, 0, 0, 0.24) !important;
+}
+
+/**/
 /*# sourceMappingURL=Home.module.css.map */

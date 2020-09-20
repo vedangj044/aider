@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useContext, useCallback } from "react";
 import styles from "./Home.module.css";
 import { withRouter } from "react-router-dom";
-import { Avatar, Grid, Paper } from "@material-ui/core";
+import { Avatar, Grid, Paper, Card, IconButton } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
@@ -9,6 +9,8 @@ import StorageIcon from "@material-ui/icons/Storage";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import { Settings } from "@material-ui/icons";
 import classNames from "classnames";
+import { GlobalContext } from "../../Context/GlobalContext";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const Home = ({ history }) => {
   const CurrentComponent = () => {
@@ -95,7 +97,39 @@ const Home = ({ history }) => {
 export default withRouter(Home);
 
 const QuestionsComponent = () => {
-  return <div>Hello</div>;
+  const { questions, setQuestions } = useContext(GlobalContext);
+
+  console.log(questions);
+
+  return (
+    <div>
+      <Grid container spacing={4}>
+        {questions.map((question, index) => {
+          return (
+            <Grid key={index} item xl={4} lg={4} md={6} sm={6} s={12}>
+              <Card className={styles.questionCard}>
+                <h4>{question.question}</h4>
+                <div className={styles.options}>
+                  {question.options.map((option) => {
+                    return (
+                      <div className={styles.option}>
+                        <p>{option.name}</p>
+                        <p>{option.votes}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <h5>{question.answer}</h5>
+                <IconButton className={styles.deleteBtn}>
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </Card>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </div>
+  );
 };
 
 const SyllabusComponent = () => {
