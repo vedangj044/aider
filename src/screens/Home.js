@@ -1,18 +1,29 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const SCREEN_HEIGHT = Math.round(Dimensions.get("window").height);
 const SCREEN_WIDTH = Math.round(Dimensions.get("window").width);
 
 export default class Home extends Component {
-  state = {
-    images: [
-      "https://picsum.photos/200/300",
-      "https://picsum.photos/id/237/200/300",
-      "https://picsum.photos/seed/picsum/200/300",
-    ],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/id/237/200/300",
+        "https://picsum.photos/seed/picsum/200/300",
+      ],
+    };
+  }
 
   render() {
     return (
@@ -29,6 +40,14 @@ export default class Home extends Component {
           autoplay
           circleLoop
         />
+        <View style={styles.feed}>
+          <Icon
+            onPress={() => this.props.navigation.navigate("Feeds")}
+            name="upcircle"
+            size={40}
+            color="#fff"
+          />
+        </View>
       </View>
     );
   }
@@ -39,5 +58,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  feed: {
+    position: "absolute",
+    right: 20,
+    bottom: 30,
   },
 });
