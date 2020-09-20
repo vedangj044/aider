@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# Authentication Files
+/src/Auth/Firebase.js
+
 # testing
 /coverage
 
