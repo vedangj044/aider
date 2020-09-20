@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Home.module.css";
+import { withRouter } from "react-router-dom";
 import { Avatar, Grid, Paper } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
@@ -9,7 +10,12 @@ import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import { Settings } from "@material-ui/icons";
 import classNames from "classnames";
 
-const Home = () => {
+const Home = ({ history }) => {
+  switch (history.location.pathname) {
+  }
+
+  console.log(history);
+
   return (
     <div className={styles.container}>
       <Paper className={styles.innerContainer}>
@@ -21,24 +27,46 @@ const Home = () => {
                   <SupervisorAccountIcon color="primary" />
                 </Avatar>
               </div>
-              <div className={styles.questions}>
+              <div
+                className={classNames(
+                  styles.questions,
+                  history.location.pathname === "/questions"
+                    ? styles.selected
+                    : null
+                )}
+                onClick={() => history.push("/questions")}
+              >
                 <QuestionAnswerIcon />
                 <h3>Questions</h3>
                 {/* <PlayCircleFilledIcon /> */}
               </div>
-              <div className={classNames(styles.syllabus, styles.selected)}>
+              <div
+                className={classNames(
+                  styles.syllabus,
+                  history.location.pathname === "/syllabus"
+                    ? styles.selected
+                    : null
+                )}
+                onClick={() => history.push("/syllabus")}
+              >
                 <ImportContactsIcon />
                 <h3>Syllabus</h3>
                 {/* <PlayCircleFilledIcon /> */}
               </div>
-              <div className={styles.data}>
+              <div
+                className={classNames(
+                  styles.data,
+                  history.location.pathname === "/data" ? styles.selected : null
+                )}
+                onClick={() => history.push("/data")}
+              >
                 <StorageIcon />
                 <h3>Data</h3>
                 {/* <PlayCircleFilledIcon /> */}
               </div>
               <div className={styles.tools}>
                 <p>Tools</p>
-                <div class={styles.settings}>
+                <div className={styles.settings}>
                   <Settings />
                   <h3>Settings</h3>
                 </div>
@@ -54,4 +82,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withRouter(Home);
