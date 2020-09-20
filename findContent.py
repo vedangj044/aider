@@ -16,7 +16,7 @@ class getContent():
         self.wiki = wikipediaapi.Wikipedia('en')
         self.youtube_link = SearchVideos(self.topic , offset = 1, mode ="json", max_results=5)
 
-        if len(self.int_text) == 0 and len(self.int_yout) == 0:
+        if len(self.int_text) == 0 or len(self.int_yout) == 0:
             if self.wiki.page(self.topic).exists():
                 self.summary = self.wiki.page(self.topic).summary
             else:

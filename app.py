@@ -1,7 +1,10 @@
-from flask import Flask,request, make_response, jsonify
+from flask import Flask,request, make_response, jsonify, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
+from flaskthreads import AppContextThread
+from tokenizer import extractor, reader
+from findContent import getContent
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = '/uploadsFlask'
@@ -48,7 +51,24 @@ def syllabus():
         db.session.add(item)
         db.session.commit()
 
+        g.file = file.filename
+
+        theard_  = AppContextThread(target = updateSyllabusToFirebase)
+        theard_.start()
+
         return make_response("Syllabus Added Successfully")
+
+def updateSyllabusToFirebase():
+    text = extractor(reader(g.file).full_text).final_list
+
+    l = []
+    for i in text:
+        topics = i.split(",")
+        for j in topics:
+            l.append(getContent(j).summary)
+
+    with open("new.txt", "w") as outfile:
+        outfile.write("\n".join(i for i in l))
 
 if __name__ == "__main__":
     db.create_all()

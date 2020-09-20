@@ -7,7 +7,7 @@ import os
 class reader():
     def __init__(self, file):
         self.file = file
-        self.pages = convert_from_path(self.pdf_file, 500)
+        self.pages = convert_from_path(self.file, 500)
         self.image_counter = 1
         for self.page in self.pages:
             self.filename = "page_"+str(self.image_counter)+".jpg"
@@ -58,3 +58,5 @@ class extractor():
             self.final_list.append(i)
 
         return self.final_list
+
+# print(extractor(reader("ds1.pdf").full_text).final_list)
