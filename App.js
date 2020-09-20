@@ -10,6 +10,9 @@ import Splash from "./src/screens/Splash";
 const HomeNavigator = createStackNavigator({
   Home: {
     screen: Home,
+    navigationOptions: {
+      headerShown: false,
+    },
   },
 });
 
