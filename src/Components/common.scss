@@ -1,3 +1,5 @@
+@import "../App.module.scss";
+
 .circularProgress svg {
   color: var(--orangeTint) !important;
 }
@@ -5,5 +7,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: var(--fixedWidth);
+  margin: auto;
   min-height: 100vh;
+}
+.btn {
+  background: var(--primaryColor) !important;
 }

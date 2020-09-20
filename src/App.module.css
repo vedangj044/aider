@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -8,5 +9,10 @@
 
 :root {
   --fixedWidth: 70%;
+  --primaryColor: #473bf0;
+}
+
+body {
+  background: rgba(245, 245, 245, 0.8);
 }
 /*# sourceMappingURL=App.module.css.map */

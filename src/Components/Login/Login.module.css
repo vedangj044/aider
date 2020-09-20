@@ -1,1 +1,120 @@
-/* No CSS *//*# sourceMappingURL=Login.module.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+:root {
+  --fixedWidth: 70%;
+  --primaryColor: #473bf0;
+}
+
+body {
+  background: rgba(245, 245, 245, 0.8);
+}
+
+.circularProgress svg {
+  color: var(--orangeTint) !important;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: var(--fixedWidth);
+  margin: auto;
+  min-height: 100vh;
+}
+
+.btn {
+  background: var(--primaryColor) !important;
+}
+
+.formContainer,
+form {
+  padding: 20px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 260px;
+}
+
+.formContainer h3,
+form h3 {
+  width: 100%;
+  margin-bottom: 20px;
+  color: var(--primaryColor);
+  font-weight: 800;
+  font-size: 1.8rem;
+}
+
+.formContainer form,
+form form {
+  padding: 0;
+}
+
+.formContainer form .hs-form-required,
+form form .hs-form-required {
+  display: none;
+}
+
+.formContainer .inputField,
+form .inputField {
+  margin: 10px 0;
+  width: 100% !important;
+}
+
+.formContainer .inputField input,
+form .inputField input {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.formContainer .submitBtn,
+form .submitBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.formContainer .submitBtn .btn,
+form .submitBtn .btn {
+  background: var(--primaryColor) !important;
+  color: white;
+  font-weight: 600 !important;
+}
+
+.formContainer .submitBtn p,
+form .submitBtn p {
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+}
+/*# sourceMappingURL=Login.module.css.map */

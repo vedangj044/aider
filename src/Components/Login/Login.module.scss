@@ -1,0 +1,51 @@
+@import "../common.scss";
+
+.formContainer,
+form {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 260px;
+
+  h3 {
+    width: 100%;
+    margin-bottom: 20px;
+    color: var(--primaryColor);
+    font-weight: 800;
+    font-size: 1.8rem;
+  }
+  form {
+    padding: 0;
+    .hs-form-required {
+      display: none;
+    }
+  }
+  .inputField {
+    margin: 10px 0;
+    width: 100% !important;
+    input {
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+  .submitBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+
+    .btn {
+      background: var(--primaryColor) !important;
+      color: white;
+      font-weight: 600 !important;
+    }
+    p {
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
