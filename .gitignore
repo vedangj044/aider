@@ -1,0 +1,13 @@
+*.sqlite3
+__pycache__
+credentials.json
+credentials.dat
+data.sqlite3
+env
+*.pickle
+Ritik_CMS
+token.json
+token.pickle
+.ipynb_checkpoints
+CreativeButtons
+.pdf
