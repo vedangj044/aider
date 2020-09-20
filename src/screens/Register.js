@@ -5,6 +5,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from "react-native-google-signin";
+import firebase from "firebase";
 
 export default class Auth extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class Auth extends Component {
       gettingLoginStatus: true,
     };
   }
+
   componentDidMount() {
     GoogleSignin.configure({});
   }
@@ -26,9 +28,26 @@ export default class Auth extends Component {
         //Always resolves to true on iOS.
         showPlayServicesUpdateDialog: true,
       });
-      const userInfo = await GoogleSignin.signIn();
+      var userInfo = await GoogleSignin.signIn();
       this.setState({ userInfo: userInfo });
+
       if (userInfo !== null) {
+        // Add to Firebase
+        let name = userInfo.user.name;
+        let email = userInfo.user.email;
+        let profile = userInfo.user.photo;
+        firebase
+          .database()
+          .ref("Users/")
+          .push({
+            name,
+            email,
+            profile,
+          })
+          .then((data) => {})
+          .catch((err) => {
+            console.log("error saving data", err);
+          });
         this.props.navigation.navigate("Home");
       }
     } catch (error) {

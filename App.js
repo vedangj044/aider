@@ -15,9 +15,28 @@ import Splash from "./src/screens/Splash";
 import Register from "./src/screens/Register";
 import Profile from "./src/screens/Profile";
 
+import firebase from "firebase";
+
+var config = {
+  databaseURL: "https://aarambh-aider.firebaseio.com",
+  projectId: "aarambh-aider",
+};
+
+firebase.initializeApp(config);
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
+
 const DrawerNavigator = createDrawerNavigator({
   Feeds: {
     screen: Feeds,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Profile: {
+    screen: Profile,
     navigationOptions: {
       headerShown: false,
     },
