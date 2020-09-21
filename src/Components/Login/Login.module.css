@@ -39,8 +39,12 @@ body {
   background: var(--primaryColor) !important;
 }
 
+.inputField {
+  width: 100% !important;
+}
+
 .formContainer,
-form {
+.loginForm {
   padding: 20px 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -59,7 +63,7 @@ form {
 }
 
 .formContainer h3,
-form h3 {
+.loginForm h3 {
   width: 100%;
   margin-bottom: 20px;
   color: var(--primaryColor);
@@ -67,29 +71,29 @@ form h3 {
   font-size: 1.8rem;
 }
 
-.formContainer form,
-form form {
+.formContainer .loginForm,
+.loginForm .loginForm {
   padding: 0;
 }
 
-.formContainer form .hs-form-required,
-form form .hs-form-required {
+.formContainer .loginForm .hs-form-required,
+.loginForm .loginForm .hs-form-required {
   display: none;
 }
 
 .formContainer .inputField,
-form .inputField {
+.loginForm .inputField {
   margin: 10px 0;
   width: 100% !important;
 }
 
 .formContainer .inputField input,
-form .inputField input {
+.loginForm .inputField input {
   color: rgba(0, 0, 0, 0.8);
 }
 
 .formContainer .submitBtn,
-form .submitBtn {
+.loginForm .submitBtn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,14 +108,14 @@ form .submitBtn {
 }
 
 .formContainer .submitBtn .btn,
-form .submitBtn .btn {
+.loginForm .submitBtn .btn {
   background: var(--primaryColor) !important;
   color: white;
   font-weight: 600 !important;
 }
 
 .formContainer .submitBtn p,
-form .submitBtn p {
+.loginForm .submitBtn p {
   font-weight: 600;
   font-size: 0.8rem;
   cursor: pointer;

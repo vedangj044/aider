@@ -1,7 +1,7 @@
 @import "../common.scss";
 
 .formContainer,
-form {
+.loginForm {
   padding: 20px 30px;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@ form {
     font-weight: 800;
     font-size: 1.8rem;
   }
-  form {
+  .loginForm {
     padding: 0;
     .hs-form-required {
       display: none;

@@ -34,7 +34,7 @@ const Login = ({ history }) => {
     <div className={styles.container}>
       <Paper className={styles.formContainer}>
         <h3>Login</h3>
-        <form onSubmit={onSubmit}>
+        <form className={styles.loginForm} onSubmit={onSubmit}>
           <TextField
             required
             autoFocus

@@ -38,4 +38,9 @@ body {
 .btn {
   background: var(--primaryColor) !important;
 }
+
+.inputField,
+.fullWidth {
+  width: 100% !important;
+}
 /*# sourceMappingURL=common.css.map */
