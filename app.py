@@ -86,19 +86,34 @@ def updateSyllabusToFirebase():
 l = {}
 
 def stream_handler(message):
-    print(message["data"])
-    if message["event"] == "put":
+    if message["event"] == "put" and message["data"] is not None:
         if isinstance(message["data"], dict):
             l.update(message["data"])
         else:
+            print(message["path"])
             path = message["path"].split("/")[1:]
             l[path[0]][path[1]][path[2]] = message["data"]
             if path[1] == "option1":
                 text = l[path[0]]["answer"].replace("____", str(message["data"]))
                 generateStory(text, path[0]+".png")
                 storage = firebase.storage()
-                storage.child("images/story.png").put(path[0]+".png")
-                print(storage.child("images/story.png").get_url(None))
+                storage.child("images/"+path[0]+".png").put(path[0]+".png")
+                print(storage.child("images/"+path[0]+".png").get_url(None))
+
+
+def stream_handler1(message):
+    if message["event"] == "put":
+        name = ""
+        if isinstance(message["data"], dict):
+            name = list(message["data"].keys())[0]
+            generateStory(message["data"][name], name+".png")
+        else:
+            name = message["path"].split("/")[1:][0]
+            generateStory(message["data"], name+".png")
+        name = name+".png"
+        storage = firebase.storage()
+        storage.child("images/"+name).put(name)
+
 
 
 if __name__ == "__main__":
@@ -107,5 +122,6 @@ if __name__ == "__main__":
 
     db = firebase.database()
     my_stream = db.child("poll").stream(stream_handler)
+    my_stream_annoucement = db.child("announcement").stream(stream_handler1)
 
     app.run(debug=True)
