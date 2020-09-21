@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   Text,
   View,
@@ -11,7 +11,7 @@ import { SliderBox } from "react-native-image-slider-box";
 import Icon from "react-native-vector-icons/AntDesign";
 import firebase from "firebase";
 
-export default class Home extends Component {
+export default class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,12 +23,14 @@ export default class Home extends Component {
         "https://firebasestorage.googleapis.com/v0/b/aarambh-aider.appspot.com/o/images%2Fstory3.png?alt=media",
       ],
       showImages: [],
+      loading: true,
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     let res = [];
     let to_show = {};
+    this.setState({ loading: true });
     firebase
       .database()
       .ref("announcement")
@@ -64,10 +66,16 @@ export default class Home extends Component {
     if (to_show["story3"] === 1) {
       showImages.push(this.state.images[4]);
     }
-    this.setState({ showImages });
+    this.setState({ showImages, loading: false });
   }
 
   render() {
+    if (!this.state.loading) {
+      <View>
+        <Text>Loading</Text>
+      </View>;
+    }
+
     return (
       <View style={styles.container}>
         <SliderBox

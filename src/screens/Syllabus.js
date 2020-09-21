@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { View, Text, ScrollView, Dimensions } from "react-native";
 import {
   Container,
@@ -18,7 +18,7 @@ import { Thumbnail } from "react-native-thumbnail-video";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-export default class Syllabus extends Component {
+export default class Syllabus extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

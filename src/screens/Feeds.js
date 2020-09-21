@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   View,
   StyleSheet,
@@ -22,7 +22,9 @@ import {
 } from "native-base";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-export default class Feeds extends Component {
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+
+export default class Feeds extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,28 +34,10 @@ export default class Feeds extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.setState({ loading: true });
-    var res = [];
-    firebase
-      .database()
-      .ref("Feeds/")
-      .on("value", (snapshot) => {
-        var data = snapshot.val();
-        Object.keys(data).map((key, index) => {
-          let obj = {};
-          obj["feed"] = data[key]["feed"];
-          obj["photo"] = data[key]["photo"];
-          obj["name"] = data[key]["name"];
-          res.push(obj);
-        });
-      });
-    this.fetchData();
-    this.setState({ data: res, loading: false });
-  }
-
-  fetchData = () => {
-    var res = [];
+    var poll = [];
+    var feeds = [];
     firebase
       .database()
       .ref("poll")
@@ -66,11 +50,26 @@ export default class Feeds extends Component {
           obj["question"] = data[key]["answer"];
           obj["option1"] = data[key]["option1"]["value"];
           obj["option2"] = data[key]["option2"]["value"];
-          res.push(obj);
+          poll.push(obj);
         });
       });
-    this.setState({ poll: res });
-  };
+
+    firebase
+      .database()
+      .ref("Feeds/")
+      .on("value", (snapshot) => {
+        var data = snapshot.val();
+        Object.keys(data).map((key, index) => {
+          let obj = {};
+          obj["feed"] = data[key]["feed"];
+          obj["photo"] = data[key]["photo"];
+          obj["name"] = data[key]["name"];
+          feeds.push(obj);
+        });
+      });
+
+    this.setState({ data: feeds, loading: false, poll: poll });
+  }
 
   _renderItem = ({ item }) => {
     return (
@@ -134,8 +133,29 @@ export default class Feeds extends Component {
     );
   };
 
+  renderData = ({ item }) => {
+    return (
+      <Card key={Math.random().toString()} style={{ flex: 0, padding: 10 }}>
+        <CardItem>
+          <Left>
+            <Thumbnail source={{ uri: item.photo }} />
+            <Body>
+              <Text>{item.name}</Text>
+              <Text style={{ color: "#D3D3D3" }}>15 April, 2200</Text>
+            </Body>
+          </Left>
+        </CardItem>
+        <CardItem>
+          <Body>
+            <Text>{item.feed}</Text>
+          </Body>
+        </CardItem>
+      </Card>
+    );
+  };
+
   render() {
-    let { loading, data } = this.state;
+    let { loading, data, poll } = this.state;
     if (loading) {
       return (
         <View>
@@ -154,28 +174,15 @@ export default class Feeds extends Component {
             data={this.state.poll}
             extraData={this.state}
             renderItem={this._renderItem}
+            keyExtractor={(item) => item.$t}
           />
           <Container>
-            {data.map((item, i) => {
-              return (
-                <Card style={{ flex: 0, padding: 10 }} key={i}>
-                  <CardItem>
-                    <Left>
-                      <Thumbnail source={{ uri: item.photo }} />
-                      <Body>
-                        <Text>{item.name}</Text>
-                        <Text style={{ color: "#D3D3D3" }}>15 April, 2200</Text>
-                      </Body>
-                    </Left>
-                  </CardItem>
-                  <CardItem>
-                    <Body>
-                      <Text>{item.feed}</Text>
-                    </Body>
-                  </CardItem>
-                </Card>
-              );
-            })}
+            <FlatList
+              data={this.state.data}
+              extraData={this.state}
+              renderItem={this.renderData}
+              keyExtractor={(item) => item.$t}
+            />
             <Icon
               onPress={() => this.props.navigation.navigate("AddFeed")}
               name="chat"
@@ -198,7 +205,7 @@ const styles = StyleSheet.create({
 
   icon: {
     position: "absolute",
-    bottom: 60,
+    top: 350,
     right: 40,
   },
 });
