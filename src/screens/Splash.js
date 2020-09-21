@@ -15,7 +15,7 @@ export default class Splash extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ fontSize: 25 }}>Aider</Text>
+        <Text style={{ fontSize: 48, color: "#1eb8b8" }}>A i d e r</Text>
       </View>
     );
   }

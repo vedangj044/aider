@@ -17,7 +17,9 @@ export default class Auth extends Component {
   }
 
   componentDidMount() {
-    GoogleSignin.configure({});
+    GoogleSignin.configure({
+      webClientId: '297471107724-0p0b9gb59k7sh3kem58j3hhkcj8cgsjd.apps.googleusercontent.com',
+    });
   }
 
   _signIn = async () => {
@@ -36,10 +38,11 @@ export default class Auth extends Component {
         let name = userInfo.user.name;
         let email = userInfo.user.email;
         let profile = userInfo.user.photo;
+        let id = userInfo.user.id;
         firebase
           .database()
-          .ref("Users/")
-          .push({
+          .ref(`Users/${id}`)
+          .set({
             name,
             email,
             profile,

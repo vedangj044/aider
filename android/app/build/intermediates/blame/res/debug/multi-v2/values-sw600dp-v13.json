@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/friday/aider/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "F:\\MedicapsHack\\aider\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/home/friday/.gradle/caches/transforms-2/files-2.1/670361948055d441ff65ae93c5d6d9b8/material-1.1.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\dhana\\.gradle\\caches\\transforms-2\\files-2.1\\670361948055d441ff65ae93c5d6d9b8\\material-1.1.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12,13,14",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/home/friday/.gradle/caches/transforms-2/files-2.1/e4043c6e9a4c8e695eae8f7aedd8cb7b/appcompat-1.1.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\dhana\\.gradle\\caches\\transforms-2\\files-2.1\\e4043c6e9a4c8e695eae8f7aedd8cb7b\\appcompat-1.1.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
