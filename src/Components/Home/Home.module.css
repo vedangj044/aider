@@ -385,4 +385,30 @@ body {
 }
 
 /**/
+.inputFieldTextArea {
+  padding: 10px;
+  outline: none !important;
+  border: none !important;
+  background: #e4e2f7c5;
+  border-radius: 5px;
+}
+
+.heading {
+  margin: 10px 0;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.heading:nth-child(2) {
+  margin-top: 30px 0 10px 0 !important;
+}
+
+.questionCard h2 {
+  font-size: 1.4rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.announcement {
+  min-height: 100px !important;
+}
 /*# sourceMappingURL=Home.module.css.map */

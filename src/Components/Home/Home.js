@@ -19,6 +19,7 @@ import {
   FormControl,
   Radio,
   RadioGroup,
+  TextareaAutosize,
 } from "@material-ui/core";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
@@ -118,9 +119,15 @@ const QuestionsComponent = () => {
     setQuestions,
     saveQuestionToDB,
     deleteQuestionFromDB,
+    announcements,
+    setAnnouncements,
+    saveAnnouncementToDB,
+    deleteAnnouncementFromDB,
   } = useContext(GlobalContext);
   const [open, setOpen] = useState(false);
   const [qid, setQid] = useState(null);
+  const [Anopen, setAnOpen] = useState(false);
+  const [aid, setAid] = useState(null);
 
   const getWidth = (index, i) => {
     const total =
@@ -136,6 +143,18 @@ const QuestionsComponent = () => {
     setQid(id);
   };
 
+  const onClickDeleteAnn = (id) => {
+    setAnOpen(true);
+    setAid(id);
+  };
+
+  const DeleteAnnouncement = () => {
+    deleteAnnouncementFromDB(qid).then(() => {
+      setAnnouncements(announcements.filter((ann) => ann.id !== aid));
+    });
+    setAid(null);
+  };
+
   const DeleteQuestion = () => {
     deleteQuestionFromDB(qid).then(() => {
       setQuestions(questions.filter((question) => question.id !== qid));
@@ -145,6 +164,10 @@ const QuestionsComponent = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const closeDialogAnnDel = () => {
+    setAnOpen(false);
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -171,10 +194,6 @@ const QuestionsComponent = () => {
   };
 
   const AddQuestionToDb = () => {};
-
-  const AddAnnouncement = () => {
-    setAnchorEl(null);
-  };
 
   const ContentForAddQuestion = () => {
     const [questiontoAdd, setQuestionToAdd] = useState("");
@@ -295,6 +314,76 @@ const QuestionsComponent = () => {
 
   //
 
+  // Announcement
+  const AddAnnouncement = () => {
+    handleCloseMenu();
+    setAopen(true);
+  };
+
+  const [aOpen, setAopen] = useState(false);
+
+  const closeDialogAnn = () => {
+    setAopen(false);
+  };
+
+  const ContentForAddAnnouncement = () => {
+    const [announcement, setAnnouncement] = useState("");
+
+    const getID = () => {
+      let tempId = [];
+
+      if (!announcements.some((ann) => ann.id === "an1")) tempId.push(1);
+      if (!announcements.some((ann) => ann.id === "an2")) tempId.push(2);
+
+      if (tempId.length === 1) {
+        return tempId[0];
+      } else {
+        let lowest = tempId[0];
+        for (let i in tempId) {
+          if (tempId[i] <= lowest) lowest = tempId[i];
+        }
+        return lowest;
+      }
+    };
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+      saveAnnouncementToDB(announcement, `an${getID()}`);
+      setAnnouncements([announcement, ...announcements]);
+      closeDialog();
+    };
+
+    return (
+      <form onSubmit={onSubmit} className={styles.addQuestionForm}>
+        <TextareaAutosize
+          required
+          className={styles.inputFieldTextArea}
+          type="text"
+          value={announcement}
+          rowsMin={3}
+          onChange={(e) => {
+            setAnnouncement(e.target.value);
+          }}
+          placeholder="Enter Announcement"
+        />
+        <div className={styles.actionBtn}>
+          <Button
+            className={styles.action}
+            onClick={closeDialogAnn}
+            variant="text"
+          >
+            Cancel
+          </Button>
+          <Button type="submit" className={styles.action} variant="text">
+            Submit
+          </Button>
+        </div>
+      </form>
+    );
+  };
+
+  //
+
   const WhichDialog = ({ which }) => {
     switch (which) {
       case "deleteQuestion":
@@ -322,6 +411,32 @@ const QuestionsComponent = () => {
             component={ContentForAddQuestion}
           />
         );
+      case "addAnnouncement":
+        return (
+          <DialogComponent
+            title="Add Announcement"
+            negative={null}
+            positive={null}
+            trigger={AddQuestionToDb}
+            open={aOpen}
+            handleClose={closeDialogAnn}
+            content={null}
+            component={ContentForAddAnnouncement}
+          />
+        );
+      case "deleteAnnouncement":
+        return (
+          <DialogComponent
+            open={Anopen}
+            title="Are you sure you wish to delete the Announcement"
+            content={null}
+            negative={"No"}
+            positive={"Yes, Delete"}
+            trigger={DeleteAnnouncement}
+            handleClose={closeDialogAnnDel}
+          />
+        );
+
       default:
         break;
     }
@@ -352,49 +467,87 @@ const QuestionsComponent = () => {
             <p>Oops! Seems like you haven't added anything yet :(</p>
           </div>
         ) : (
-          <Grid container spacing={4}>
-            {questions.map((question, index) => {
-              return (
-                <Grid key={index} item xl={4} lg={4} md={6} sm={12} s={12}>
-                  <Card className={styles.questionCard}>
-                    <h4>{question.question}</h4>
-                    <div className={styles.options}>
-                      <div className={styles.option}>
-                        <div
-                          className={styles.votingBar}
-                          style={{ width: `${getWidth(index, 1)}%` }}
-                        ></div>
-                        <p>{question.option1.value}</p>
-                        <p>{question.option1.count}</p>
-                      </div>
-                      <div className={styles.option}>
-                        <div
-                          className={styles.votingBar}
-                          style={{ width: `${getWidth(index, 2)}%` }}
-                        ></div>
-                        <p>{question.option2.value}</p>
-                        <p>{question.option2.count}</p>
-                      </div>
-                    </div>
-                    <h5>{question.answer}</h5>
-                    <Tooltip placement="bottom" title="Delete Question">
-                      <IconButton
-                        onClick={() => onClickDelete(question.id)}
-                        className={styles.deleteBtn}
-                      >
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                  </Card>
+          <Grid container>
+            <p className={styles.heading}>Stories</p>
+
+            <Grid item md={12}>
+              <Grid container spacing={4}>
+                {questions.map((question, index) => {
+                  return (
+                    <Grid key={index} item xl={4} lg={4} md={6} sm={12} s={12}>
+                      <Card className={styles.questionCard}>
+                        <h4>{question.question}</h4>
+                        <div className={styles.options}>
+                          <div className={styles.option}>
+                            <div
+                              className={styles.votingBar}
+                              style={{ width: `${getWidth(index, 1)}%` }}
+                            ></div>
+                            <p>{question.option1.value}</p>
+                            <p>{question.option1.count}</p>
+                          </div>
+                          <div className={styles.option}>
+                            <div
+                              className={styles.votingBar}
+                              style={{ width: `${getWidth(index, 2)}%` }}
+                            ></div>
+                            <p>{question.option2.value}</p>
+                            <p>{question.option2.count}</p>
+                          </div>
+                        </div>
+                        <h5>{question.answer}</h5>
+                        <Tooltip placement="bottom" title="Delete Question">
+                          <IconButton
+                            onClick={() => onClickDelete(question.id)}
+                            className={styles.deleteBtn}
+                          >
+                            <DeleteIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                      </Card>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+              <Grid item md={12}>
+                <p className={styles.heading}>Announcements</p>
+                <Grid container spacing={4}>
+                  {announcements.map((ann) => {
+                    return (
+                      <Grid key={ann.id} item md={4}>
+                        <Card
+                          className={classNames(
+                            styles.questionCard,
+                            styles.announcement
+                          )}
+                        >
+                          <h2>{ann.msg}</h2>
+                          <Tooltip
+                            placement="bottom"
+                            title="Delete Announcement"
+                          >
+                            <IconButton
+                              onClick={() => onClickDeleteAnn(ann.id)}
+                              className={styles.deleteBtn}
+                            >
+                              <DeleteIcon fontSize="small" />
+                            </IconButton>
+                          </Tooltip>
+                        </Card>
+                      </Grid>
+                    );
+                  })}
                 </Grid>
-              );
-            })}
+              </Grid>
+            </Grid>
           </Grid>
         )}
       </div>
 
       <WhichDialog which={"deleteQuestion"} />
+      <WhichDialog which={"deleteAnnouncement"} />
       <WhichDialog which={"addQuestion"} />
+      <WhichDialog which={"addAnnouncement"} />
     </div>
   );
 };

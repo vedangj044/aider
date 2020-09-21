@@ -1,1 +1,23 @@
 @import "../common.scss";
+
+.syllabusContainer {
+  width: 100%;
+
+  .topbar {
+    padding: 10px 50px;
+    background: white;
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .innerContainer {
+    padding: 50px;
+    width: 100%;
+    .formControl {
+      width: 100% !important;
+    }
+  }
+  .inputSelect {
+    width: 100% !important;
+  }
+}

@@ -43,4 +43,33 @@ body {
 .fullWidth {
   width: 100% !important;
 }
+
+.syllabusContainer {
+  width: 100%;
+}
+
+.syllabusContainer .topbar {
+  padding: 10px 50px;
+  background: white;
+  width: 100% !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.syllabusContainer .innerContainer {
+  padding: 50px;
+  width: 100%;
+}
+
+.syllabusContainer .innerContainer .formControl {
+  width: 100% !important;
+}
+
+.syllabusContainer .inputSelect {
+  width: 100% !important;
+}
 /*# sourceMappingURL=Syllabus.module.css.map */

@@ -51,6 +51,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [questions, setQuestions] = useState([]);
   const [syllabus, setSyllabus] = useState([]);
   const [data, setData] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
 
   const saveQuestionToDB = async (question, id) => {
     await db
@@ -70,18 +71,49 @@ export const GlobalContextProvider = ({ children }) => {
       .then(() => console.log("Deleted"));
   };
 
+  const saveAnnouncementToDB = async (ann, id) => {
+    await db
+      .ref("announcement")
+      .child(id)
+      .set(ann)
+      .then(() => {
+        console.log("success!");
+      });
+  };
+
+  const deleteAnnouncementFromDB = async (id) => {
+    await db
+      .ref("announcement")
+      .child(id)
+      .remove()
+      .then(() => console.log("Deleted"));
+  };
+
   useEffect(() => {
     const fetchDb = async () => {
       const storiesRef = db.ref("poll");
+      const announcementRef = db.ref("announcement");
       await storiesRef.on("value", (snap) => {
         let dbQuestions = snap.val();
-        console.log(questions);
         let temp = [];
         for (let question in dbQuestions) {
           // setQuestions([dbQuestions[questions], ...questions]);
           temp.push({ id: question, ...dbQuestions[question] });
         }
         setQuestions(temp, ...questions);
+      });
+
+      await announcementRef.on("value", (snap) => {
+        let ann = snap.val();
+        let temp = [];
+        temp = Object.values(ann);
+        const annTemp = [];
+        temp.forEach((item, i) =>
+          annTemp.push({ id: `an${i + 1}`, msg: item })
+        );
+        setAnnouncements(annTemp, ...announcements);
+        console.log(temp);
+        console.log(annTemp);
       });
     };
     fetchDb();
@@ -98,6 +130,10 @@ export const GlobalContextProvider = ({ children }) => {
         setData,
         saveQuestionToDB,
         deleteQuestionFromDB,
+        announcements,
+        setAnnouncements,
+        saveAnnouncementToDB,
+        deleteAnnouncementFromDB,
       }}
     >
       {children}
