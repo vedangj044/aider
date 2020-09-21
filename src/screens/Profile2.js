@@ -39,9 +39,9 @@ export default class Profile extends Component {
   render() {
     const name = this.props.navigation.getParam("name", "John Doe");
     const email = this.props.navigation.getParam("email", "john@gmail.com");
-    const photo = this.props.navigation.getParam("photo", photo);
+    const photo = this.props.navigation.getParam("photo", "photo");
     const bio = this.props.navigation.getParam("bio", "Django Developer");
-    const branch = this.props.navigation.getParam("branch", IT);
+    const branch = this.props.navigation.getParam("branch", "IT");
     const year = this.props.navigation.getParam("year", "2nd");
 
     console.log(name, email, photo);
@@ -54,11 +54,9 @@ export default class Profile extends Component {
         <View style={styles.body}>
           <View style={styles.bodyContent}>
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.name}>{bio}</Text>
+            <Text style={styles.info}>Django Developer</Text>
 
-            <Text style={styles.info}>
-              {branch} {year} year
-            </Text>
+            <Text style={styles.info}>IT 3rd year</Text>
             {/* <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text> */}
 
             <TouchableOpacity style={styles.buttonContainer}>

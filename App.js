@@ -17,6 +17,7 @@ import Profile from "./src/screens/Profile";
 import AddFeed from "./src/screens/AddFeed";
 import Syllabus from "./src/screens/Syllabus";
 import Profile2 from "./src/screens/Profile2";
+import Stats from "./src/screens/Stats";
 import { YellowBox } from "react-native";
 import _ from "lodash";
 
@@ -55,6 +56,12 @@ const DrawerNavigator = createDrawerNavigator({
   },
   Syllabus: {
     screen: Syllabus,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Stats: {
+    screen: Stats,
     navigationOptions: {
       headerShown: false,
     },
