@@ -234,7 +234,9 @@ body {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  margin: 5px 0;
+  padding: 5px;
+  margin: 2px 0;
+  position: relative;
 }
 
 .questionCard .options .option p {
@@ -245,6 +247,14 @@ body {
 
 .questionCard .options .option p:nth-child(2) {
   font-weight: 600;
+}
+
+.questionCard .options .option .votingBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .questionCard .deleteBtn {

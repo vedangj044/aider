@@ -99,7 +99,22 @@ export default withRouter(Home);
 const QuestionsComponent = () => {
   const { questions, setQuestions } = useContext(GlobalContext);
 
-  console.log(questions);
+  const getWidth = (index, i) => {
+    const total = questions[index].options.reduce(
+      (currentTotal, option) => currentTotal + option.votes,
+      0
+    );
+
+    const votes = questions[index].options[i].votes;
+
+    return (votes / total) * 100;
+  };
+
+  const onClickDelete = (id) => {
+    // const oldQuestions = questions;
+    // const newQuestions = oldQuestions.filter((question) => question.id !== id);
+    setQuestions(questions.filter((question) => question.id !== id));
+  };
 
   return (
     <div>
@@ -110,9 +125,13 @@ const QuestionsComponent = () => {
               <Card className={styles.questionCard}>
                 <h4>{question.question}</h4>
                 <div className={styles.options}>
-                  {question.options.map((option) => {
+                  {question.options.map((option, i) => {
                     return (
-                      <div className={styles.option}>
+                      <div key={i} className={styles.option}>
+                        <div
+                          className={styles.votingBar}
+                          style={{ width: `${getWidth(index, i)}%` }}
+                        ></div>
                         <p>{option.name}</p>
                         <p>{option.votes}</p>
                       </div>
@@ -120,7 +139,10 @@ const QuestionsComponent = () => {
                   })}
                 </div>
                 <h5>{question.answer}</h5>
-                <IconButton className={styles.deleteBtn}>
+                <IconButton
+                  onClick={() => onClickDelete(question.id)}
+                  className={styles.deleteBtn}
+                >
                   <DeleteIcon fontSize="small" />
                 </IconButton>
               </Card>

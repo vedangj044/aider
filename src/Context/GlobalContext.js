@@ -6,6 +6,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [questions, setQuestions] = useState([
     {
       question: "Where is Indore located ?",
+      id: "Q1001",
       options: [
         {
           name: "Madhya Pradesh",
@@ -28,6 +29,7 @@ export const GlobalContextProvider = ({ children }) => {
     },
     {
       question: "Where is Indore located ?",
+      id: "Q1002",
       options: [
         {
           name: "Madhya Pradesh",
@@ -50,6 +52,7 @@ export const GlobalContextProvider = ({ children }) => {
     },
     {
       question: "Where is Indore located ?",
+      id: "Q1003",
       options: [
         {
           name: "Madhya Pradesh",
