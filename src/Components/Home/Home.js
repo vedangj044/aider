@@ -66,7 +66,6 @@ const Home = ({ history }) => {
               >
                 <QuestionAnswerIcon />
                 <h3>Questions</h3>
-                {/* <PlayCircleFilledIcon /> */}
               </div>
               <div
                 className={classNames(
@@ -79,7 +78,6 @@ const Home = ({ history }) => {
               >
                 <ImportContactsIcon />
                 <h3>Syllabus</h3>
-                {/* <PlayCircleFilledIcon /> */}
               </div>
               <div
                 className={classNames(
@@ -90,7 +88,6 @@ const Home = ({ history }) => {
               >
                 <StorageIcon />
                 <h3>Data</h3>
-                {/* <PlayCircleFilledIcon /> */}
               </div>
               <div className={styles.tools}>
                 <p>Tools</p>
@@ -125,7 +122,7 @@ const QuestionsComponent = () => {
     const count =
       i === 1 ? questions[index].option1.count : questions[index].option2.count;
 
-    return (count / total) * 100;
+    return total ? (count / total) * 100 : 0;
   };
 
   const onClickDelete = (id) => {
@@ -169,6 +166,104 @@ const QuestionsComponent = () => {
 
   const AddAnnouncement = () => {
     setAnchorEl(null);
+  };
+
+  const ContentForAddQuestion = () => {
+    const [questiontoAdd, setQuestionToAdd] = useState("");
+    const [option1, setOption1] = useState("option1");
+    const [option2, setOption2] = useState("option2");
+    const [answer, setAnswer] = useState(option1);
+
+    const { questions, setQuestions } = useContext(GlobalContext);
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+      setQuestions([data, ...questions]);
+      closeDialog();
+    };
+
+    const data = {
+      id: uuidv4(),
+      question: questiontoAdd,
+      option1: {
+        value: option1,
+        count: 0,
+      },
+      option2: {
+        value: option2,
+        count: 0,
+      },
+      answer,
+    };
+
+    return (
+      <form onSubmit={onSubmit} className={styles.addQuestionForm}>
+        <TextField
+          required
+          className={styles.inputField}
+          type="text"
+          size="small"
+          value={questiontoAdd}
+          onChange={(e) => {
+            setQuestionToAdd(e.target.value);
+          }}
+          variant="filled"
+          label="Question"
+        />
+        <FormControl className={styles.fullWidth} component="fieldset">
+          <p>Selected option will be considered as answer</p>
+          <RadioGroup
+            aria-label="options"
+            name="options"
+            value={answer}
+            onChange={(e) => {
+              setAnswer(e.target.value);
+            }}
+          >
+            <div className={styles.optionInput}>
+              <Radio required className={styles.radioBtn} value={option1} />
+              <input
+                className={styles.inputField}
+                type="text"
+                size="small"
+                // value={option1}
+                onChange={(e) => {
+                  setOption1(e.target.value);
+                }}
+                variant="standard"
+                placeholder="Enter Option 1"
+              />
+            </div>
+            <div className={styles.optionInput}>
+              <Radio required className={styles.radioBtn} value={option2} />
+              <input
+                className={styles.inputField}
+                type="text"
+                size="small"
+                // value={option2}
+                onChange={(e) => {
+                  setOption2(e.target.value);
+                }}
+                variant="standard"
+                placeholder="Enter Option 2"
+              />
+            </div>
+          </RadioGroup>
+        </FormControl>
+        <div className={styles.actionBtn}>
+          <Button
+            className={styles.action}
+            onClick={closeDialog}
+            variant="text"
+          >
+            Cancel
+          </Button>
+          <Button type="submit" className={styles.action} variant="text">
+            Submit
+          </Button>
+        </div>
+      </form>
+    );
   };
 
   //
@@ -253,18 +348,6 @@ const QuestionsComponent = () => {
                         <p>{question.option2.value}</p>
                         <p>{question.option2.count}</p>
                       </div>
-                      {/* {question.options.map((option, i) => {
-                        return (
-                          <div key={i} className={styles.option}>
-                            <div
-                              className={styles.votingBar}
-                              style={{ width: `${getWidth(index, i)}%` }}
-                            ></div>
-                            <p>{option.name}</p>
-                            <p>{option.votes}</p>
-                          </div>
-                        );
-                      })} */}
                     </div>
                     <h5>{question.answer}</h5>
                     <Tooltip placement="bottom" title="Delete Question">
@@ -294,8 +377,6 @@ const SyllabusComponent = () => {
 };
 
 const DataComponent = () => {
-  const [value, setValue] = useState();
-
   return <div>Hello Data</div>;
 };
 
@@ -340,111 +421,5 @@ const DialogComponent = ({
         </DialogActions>
       ) : null}
     </Dialog>
-  );
-};
-
-const ContentForAddQuestion = () => {
-  const [questiontoAdd, setQuestionToAdd] = useState("");
-  const [option1, setOption1] = useState("option1");
-  const [option2, setOption2] = useState("option2");
-  // const [option3, setOption3] = useState("option3");
-  // const [option4, setOption4] = useState("option4");
-  const [answer, setAnswer] = useState(option1);
-
-  const { questions, setQuestions } = useContext(GlobalContext);
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setQuestions([...questions, data]);
-  };
-
-  const data = {
-    id: uuidv4(),
-    question: questiontoAdd,
-    options: [
-      {
-        name: option1,
-        votes: 0,
-      },
-      {
-        name: option2,
-        votes: 0,
-      },
-    ],
-    answer,
-  };
-
-  // const saveToLocal = useRef(
-  //   debounce(() => {
-  //     localStorage.setItem("questions", JSON.stringify(data));
-  //   }, 800)
-  // ).current;
-
-  return (
-    <form onSubmit={onSubmit} className={styles.addQuestionForm}>
-      <TextField
-        required
-        className={styles.inputField}
-        type="text"
-        size="small"
-        value={questiontoAdd}
-        onChange={(e) => {
-          setQuestionToAdd(e.target.value);
-        }}
-        variant="filled"
-        label="Question"
-      />
-      <FormControl className={styles.fullWidth} component="fieldset">
-        {/* <FormLabel className={styles.description} component="legend">
-          Select the option which is answer
-        </FormLabel> */}
-        <p>Selected option will be considered as answer</p>
-        <RadioGroup
-          aria-label="options"
-          name="options"
-          value={answer}
-          onChange={(e) => {
-            setAnswer(e.target.value);
-          }}
-        >
-          <div className={styles.optionInput}>
-            <Radio className={styles.radioBtn} value={option1} />
-            <input
-              className={styles.inputField}
-              type="text"
-              size="small"
-              // value={option1}
-              onChange={(e) => {
-                setOption1(e.target.value);
-              }}
-              variant="standard"
-              placeholder="Enter Option 1"
-            />
-          </div>
-          <div className={styles.optionInput}>
-            <Radio className={styles.radioBtn} value={option2} />
-            <input
-              className={styles.inputField}
-              type="text"
-              size="small"
-              // value={option2}
-              onChange={(e) => {
-                setOption2(e.target.value);
-              }}
-              variant="standard"
-              placeholder="Enter Option 2"
-            />
-          </div>
-        </RadioGroup>
-      </FormControl>
-      <div className={styles.actionBtn}>
-        <Button className={styles.action} variant="text">
-          Cancel
-        </Button>
-        <Button type="submit" className={styles.action} variant="text">
-          Submit
-        </Button>
-      </div>
-    </form>
   );
 };
