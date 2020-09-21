@@ -16,6 +16,7 @@ import Register from "./src/screens/Register";
 import Profile from "./src/screens/Profile";
 import AddFeed from "./src/screens/AddFeed";
 import Syllabus from "./src/screens/Syllabus";
+import Profile2 from "./src/screens/Profile2";
 import { YellowBox } from "react-native";
 import _ from "lodash";
 
@@ -75,6 +76,7 @@ const AppNavigator = createStackNavigator({
   },
   Profile: { screen: Profile },
   Splash: { screen: Splash },
+  Profile2: { screen: Profile2 },
   AddFeed: { screen: AddFeed },
   Feeds: {
     screen: DrawerNavigator,

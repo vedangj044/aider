@@ -5,6 +5,7 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import firebase from "firebase";
 import {
@@ -136,15 +137,28 @@ export default class Feeds extends PureComponent {
   renderData = ({ item }) => {
     return (
       <Card key={Math.random().toString()} style={{ flex: 0, padding: 10 }}>
-        <CardItem>
-          <Left>
-            <Thumbnail source={{ uri: item.photo }} />
-            <Body>
-              <Text>{item.name}</Text>
-              <Text style={{ color: "#D3D3D3" }}>15 April, 2200</Text>
-            </Body>
-          </Left>
-        </CardItem>
+        <TouchableOpacity
+          onPress={() =>
+            this.props.navigation.navigate("Profile2", {
+              name: item.name,
+              email: item.email,
+              photo: item.photo,
+              year: item.year,
+              branch: item.branch,
+              bio: item.bio,
+            })
+          }
+        >
+          <CardItem>
+            <Left>
+              <Thumbnail source={{ uri: item.photo }} />
+              <Body>
+                <Text>{item.name}</Text>
+                <Text style={{ color: "#D3D3D3" }}>15 April, 2200</Text>
+              </Body>
+            </Left>
+          </CardItem>
+        </TouchableOpacity>
         <CardItem>
           <Body>
             <Text>{item.feed}</Text>

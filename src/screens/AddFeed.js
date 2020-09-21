@@ -58,36 +58,14 @@ export default class AddFeed extends Component {
     this.setState({ tweet });
   };
 
-  addFeed = () => {
+  addUserData = () => {
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
     var date = dd + "/" + mm + "/" + yyyy;
-    let userInfo = this.state.userInfo;
-    let name = userInfo.user.name;
-    let email = userInfo.user.email;
-    let photo = userInfo.user.photo;
-    let id = userInfo.user.id;
+
     let feed = this.state.tweet;
-
-    firebase
-      .database()
-      .ref("Feeds/")
-      .push({
-        feed,
-        name,
-        photo,
-        date,
-      })
-      .then((data) => {})
-      .catch((err) => {
-        console.log("error saving data", err);
-      });
-    this.props.navigation.navigate("Feeds");
-  };
-
-  addUserData = () => {
     let bio = this.state.bio;
     let branch = this.state.branch;
     let year = this.state.year;
@@ -96,15 +74,15 @@ export default class AddFeed extends Component {
     let email = this.state.userInfo.user.email;
     firebase
       .database()
-      .ref("/Users")
-      .push({ name, photo, email, branch, year, bio })
+      .ref("/Feeds")
+      .push({ name, photo, email, branch, year, bio, date, feed })
       .then((data) => console.log("User Data Pushed"))
       .catch((err) => console.log(err));
+    this.props.navigation.navigate("Feeds");
   };
 
   pushData = () => {
     this.addUserData();
-    this.addFeed();
   };
   render() {
     return this.state.userInfo == null ? (
