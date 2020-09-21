@@ -7,70 +7,40 @@ export const GlobalContextProvider = ({ children }) => {
     {
       question: "Where is Indore located ?",
       id: "Q1001",
-      options: [
-        {
-          name: "Madhya Pradesh",
-          votes: 29,
-        },
-        {
-          name: "Rajasthan",
-          votes: 12,
-        },
-        {
-          name: "Karnataka",
-          votes: 4,
-        },
-        {
-          name: "Jammu Kashmir",
-          votes: 2,
-        },
-      ],
+      option1: {
+        value: "Madhya Pradesh",
+        count: 29,
+      },
+      option2: {
+        value: "Rajasthan",
+        count: 12,
+      },
       answer: "Madhya Pradesh",
     },
     {
       question: "Where is Indore located ?",
       id: "Q1002",
-      options: [
-        {
-          name: "Madhya Pradesh",
-          votes: 29,
-        },
-        {
-          name: "Rajasthan",
-          votes: 12,
-        },
-        {
-          name: "Karnataka",
-          votes: 4,
-        },
-        {
-          name: "Jammu Kashmir",
-          votes: 2,
-        },
-      ],
+      option1: {
+        value: "Madhya Pradesh",
+        count: 29,
+      },
+      option2: {
+        value: "Rajasthan",
+        count: 12,
+      },
       answer: "Madhya Pradesh",
     },
     {
       question: "Where is Indore located ?",
       id: "Q1003",
-      options: [
-        {
-          name: "Madhya Pradesh",
-          votes: 29,
-        },
-        {
-          name: "Rajasthan",
-          votes: 12,
-        },
-        {
-          name: "Karnataka",
-          votes: 4,
-        },
-        {
-          name: "Jammu Kashmir",
-          votes: 2,
-        },
-      ],
+      option1: {
+        value: "Madhya Pradesh",
+        count: 29,
+      },
+      option2: {
+        value: "Rajasthan",
+        count: 12,
+      },
       answer: "Madhya Pradesh",
     },
   ]);

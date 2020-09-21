@@ -121,11 +121,11 @@ const QuestionsComponent = () => {
 
   const getWidth = (index, i) => {
     const total =
-      questions[index].option1.votes + questions[index].option2.votes;
-    const votes =
-      i === 1 ? questions[index].option1.votes : questions[index].option2.votes;
+      questions[index].option1.count + questions[index].option2.count;
+    const count =
+      i === 1 ? questions[index].option1.count : questions[index].option2.count;
 
-    return (votes / total) * 100;
+    return (count / total) * 100;
   };
 
   const onClickDelete = (id) => {
@@ -242,16 +242,16 @@ const QuestionsComponent = () => {
                           className={styles.votingBar}
                           style={{ width: `${getWidth(index, 1)}%` }}
                         ></div>
-                        <p>{question.option1.name}</p>
-                        <p>{question.option1.votes}</p>
+                        <p>{question.option1.value}</p>
+                        <p>{question.option1.count}</p>
                       </div>
                       <div className={styles.option}>
                         <div
                           className={styles.votingBar}
                           style={{ width: `${getWidth(index, 2)}%` }}
                         ></div>
-                        <p>{question.option2.name}</p>
-                        <p>{question.option2.votes}</p>
+                        <p>{question.option2.value}</p>
+                        <p>{question.option2.count}</p>
                       </div>
                       {/* {question.options.map((option, i) => {
                         return (
