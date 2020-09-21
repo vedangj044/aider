@@ -9,32 +9,71 @@ import {
 } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import Icon from "react-native-vector-icons/AntDesign";
-
-const SCREEN_HEIGHT = Math.round(Dimensions.get("window").height);
-const SCREEN_WIDTH = Math.round(Dimensions.get("window").width);
+import firebase from "firebase";
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       images: [
-        "https://picsum.photos/200/300",
-        "https://picsum.photos/id/237/200/300",
-        "https://picsum.photos/seed/picsum/200/300",
+        "https://firebasestorage.googleapis.com/v0/b/aarambh-aider.appspot.com/o/images%2Fan1.png?alt=media",
+        "https://firebasestorage.googleapis.com/v0/b/aarambh-aider.appspot.com/o/images%2Fan2.png?alt=media",
+        "https://firebasestorage.googleapis.com/v0/b/aarambh-aider.appspot.com/o/images%2Fstory1.png?alt=media",
+        "https://firebasestorage.googleapis.com/v0/b/aarambh-aider.appspot.com/o/images%2Fstory2.png?alt=media",
+        "https://firebasestorage.googleapis.com/v0/b/aarambh-aider.appspot.com/o/images%2Fstory3.png?alt=media",
       ],
+      showImages: [],
     };
+  }
+
+  async componentDidMount() {
+    let res = [];
+    let to_show = {};
+    firebase
+      .database()
+      .ref("announcement")
+      .on("value", (snapshot) => {
+        res = snapshot.val();
+        Object.keys(res).map((key, index) => {
+          to_show[key] = 1;
+        });
+      });
+
+    firebase
+      .database()
+      .ref("poll")
+      .on("value", (snapshot) => {
+        res = snapshot.val();
+        Object.keys(res).map((key, index) => {
+          to_show[key] = 1;
+        });
+      });
+    var showImages = [];
+    if (to_show["an1"] === 1) {
+      showImages.push(this.state.images[0]);
+    }
+    if (to_show["an2"] === 1) {
+      showImages.push(this.state.images[1]);
+    }
+    if (to_show["story1"] === 1) {
+      showImages.push(this.state.images[2]);
+    }
+    if (to_show["story2"] === 1) {
+      showImages.push(this.state.images[3]);
+    }
+    if (to_show["story3"] === 1) {
+      showImages.push(this.state.images[4]);
+    }
+    this.setState({ showImages });
   }
 
   render() {
     return (
       <View style={styles.container}>
         <SliderBox
-          images={this.state.images}
+          images={this.state.showImages}
           sliderBoxHeight={Dimensions.get("window").height}
-          onCurrentImagePressed={(index) =>
-            console.warn(`image ${index} pressed`)
-          }
-          dotColor="#FFEE58"
+          dotColor="#fff"
           inactiveDotColor="#90A4AE"
           paginationBoxVerticalPadding={20}
           autoplay
@@ -44,7 +83,7 @@ export default class Home extends Component {
           <Icon
             onPress={() => this.props.navigation.navigate("Feeds")}
             name="upcircle"
-            size={40}
+            size={48}
             color="#fff"
           />
         </View>
@@ -62,7 +101,7 @@ const styles = StyleSheet.create({
 
   feed: {
     position: "absolute",
-    right: 20,
+    right: 30,
     bottom: 30,
   },
 });

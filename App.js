@@ -51,41 +51,36 @@ const DrawerNavigator = createDrawerNavigator({
   },
 });
 
-const AppNavigator = createStackNavigator(
-  {
-    Home: {
-      screen: Home,
-      navigationOptions: {
-        headerShown: false,
-      },
-    },
-    Register: {
-      screen: Register,
-      navigationOptions: {
-        headerShown: false,
-      },
-    },
-    Profile: { screen: Profile },
-    Splash: { screen: Splash },
-    AddFeed: { screen: AddFeed },
-    Feeds: {
-      screen: DrawerNavigator,
-      navigationOptions: ({ navigation }) => ({
-        headerLeft: () => (
-          <TouchableOpacity
-            style={{ marginLeft: 20 }}
-            onPress={() => navigation.toggleDrawer()}
-          >
-            <Icon name="indent" size={25} />
-          </TouchableOpacity>
-        ),
-      }),
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      headerShown: false,
     },
   },
-  {
-    initialRouteName: "Home",
-  }
-);
+  Register: {
+    screen: Register,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Profile: { screen: Profile },
+  Splash: { screen: Splash },
+  AddFeed: { screen: AddFeed },
+  Feeds: {
+    screen: DrawerNavigator,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: () => (
+        <TouchableOpacity
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.toggleDrawer()}
+        >
+          <Icon name="indent" size={25} />
+        </TouchableOpacity>
+      ),
+    }),
+  },
+});
 
 const AppSwitchNavigator = createSwitchNavigator({
   Splash: { screen: Splash },

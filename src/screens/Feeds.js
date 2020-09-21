@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  Dimensions,
+} from "react-native";
 import firebase from "firebase";
 import {
   Container,
@@ -11,6 +17,8 @@ import {
   Left,
   Body,
   Button,
+  Radio,
+  Right,
 } from "native-base";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -20,6 +28,7 @@ export default class Feeds extends Component {
     this.state = {
       data: [],
       loading: false,
+      poll: [],
     };
   }
 
@@ -39,8 +48,91 @@ export default class Feeds extends Component {
           res.push(obj);
         });
       });
+    this.fetchData();
     this.setState({ data: res, loading: false });
   }
+
+  fetchData = () => {
+    var res = [];
+    firebase
+      .database()
+      .ref("poll")
+      .on("value", (snapshot) => {
+        let data = snapshot.val();
+        Object.keys(data).map((key, index) => {
+          let obj = {};
+          obj["cnt1"] = data[key]["option1"]["count"];
+          obj["cnt2"] = data[key]["option2"]["count"];
+          obj["question"] = data[key]["answer"];
+          obj["option1"] = data[key]["option1"]["value"];
+          obj["option2"] = data[key]["option2"]["value"];
+          res.push(obj);
+        });
+      });
+    this.setState({ poll: res });
+  };
+
+  _renderItem = ({ item }) => {
+    return (
+      <Card key={Math.random().toString()}>
+        <CardItem>
+          <Body>
+            <Text>{item.question}</Text>
+          </Body>
+        </CardItem>
+        <CardItem>
+          <Button
+            full
+            primary
+            block
+            onPress={this.fetchData}
+            style={{
+              marginLeft: 10,
+              marginRight: 10,
+              marginTop: 10,
+              width: Dimensions.get("window").width - 50,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 15,
+                fontFamily: "Arial",
+                color: "#fff",
+              }}
+            >
+              {item.option1}
+            </Text>
+          </Button>
+        </CardItem>
+        <CardItem>
+          <Button
+            full
+            primary
+            block
+            onPress={this.fetchData}
+            style={{
+              marginLeft: 10,
+              marginRight: 10,
+              marginTop: 10,
+              width: Dimensions.get("window").width - 50,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 15,
+                fontFamily: "Arial",
+                color: "#fff",
+              }}
+            >
+              {item.option2}
+            </Text>
+          </Button>
+        </CardItem>
+      </Card>
+    );
+  };
 
   render() {
     let { loading, data } = this.state;
@@ -57,6 +149,12 @@ export default class Feeds extends Component {
         <ScrollView
           contentContainerStyle={{ paddingBottom: data.length * 100 }}
         >
+          <FlatList
+            horizontal={true}
+            data={this.state.poll}
+            extraData={this.state}
+            renderItem={this._renderItem}
+          />
           <Container>
             {data.map((item, i) => {
               return (
