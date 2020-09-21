@@ -14,6 +14,7 @@ import Feeds from "./src/screens/Feeds";
 import Splash from "./src/screens/Splash";
 import Register from "./src/screens/Register";
 import Profile from "./src/screens/Profile";
+import AddFeed from "./src/screens/AddFeed";
 
 import firebase from "firebase";
 
@@ -51,9 +52,15 @@ const AppNavigator = createStackNavigator(
         headerShown: false,
       },
     },
-    Register: { screen: Register },
+    Register: {
+      screen: Register,
+      navigationOptions: {
+        headerShown: false,
+      },
+    },
     Profile: { screen: Profile },
     Splash: { screen: Splash },
+    AddFeed: { screen: AddFeed },
     Feeds: {
       screen: DrawerNavigator,
       navigationOptions: ({ navigation }) => ({
@@ -74,8 +81,7 @@ const AppNavigator = createStackNavigator(
 );
 
 const AppSwitchNavigator = createSwitchNavigator({
-  // Splash: { screen: Splash },
-  Register: { screen: Register },
+  Splash: { screen: Splash },
   AppNavigator: { screen: AppNavigator },
 });
 

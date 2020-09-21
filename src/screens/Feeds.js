@@ -1,40 +1,88 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import firebase from "firebase";
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Thumbnail,
+  Text,
+  Left,
+  Body,
+  Button,
+} from "native-base";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 export default class Feeds extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: -1,
+      data: [],
+      loading: false,
     };
   }
 
-  componentDidMount() {
-    var data = [];
+  async componentDidMount() {
+    this.setState({ loading: true });
+    var res = [];
     firebase
       .database()
       .ref("Feeds/")
-      .on("value", function (snapshot) {
-        data = snapshot.val();
+      .on("value", (snapshot) => {
+        var data = snapshot.val();
+        Object.keys(data).map((key, index) => {
+          let obj = {};
+          obj["feed"] = data[key]["feed"];
+          obj["photo"] = data[key]["photo"];
+          obj["name"] = data[key]["name"];
+          res.push(obj);
+        });
       });
-    // this.setState({ data });
-    console.log(data);
+    this.setState({ data: res, loading: false });
   }
 
-  add_feed = (feed) => {
-    firebase
-      .database()
-      .push({ feed })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
   render() {
+    let { loading, data } = this.state;
+    if (loading) {
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
+    }
+
     return (
-      <View style={styles.container}>
-        <Text>Feeds</Text>
-      </View>
+      <ScrollView>
+        <Container>
+          {data.map((item, i) => {
+            return (
+              <Card style={{ flex: 0 }} key={i}>
+                <CardItem>
+                  <Left>
+                    <Thumbnail source={{ uri: item.photo }} />
+                    <Body>
+                      <Text>{item.name}</Text>
+                      <Text style={{ color: "#D3D3D3" }}>15 April, 2200</Text>
+                    </Body>
+                  </Left>
+                </CardItem>
+                <CardItem>
+                  <Body>
+                    <Text>{item.feed}</Text>
+                  </Body>
+                </CardItem>
+              </Card>
+            );
+          })}
+          <Icon
+            onPress={() => this.props.navigation.navigate("AddFeed")}
+            name="chat"
+            size={40}
+            style={styles.icon}
+          />
+        </Container>
+      </ScrollView>
     );
   }
 }
@@ -44,5 +92,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  icon: {
+    position: "absolute",
+    bottom: 60,
+    right: 40,
   },
 });
