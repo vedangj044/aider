@@ -39,7 +39,8 @@ body {
   background: var(--primaryColor) !important;
 }
 
-.inputField {
+.inputField,
+.fullWidth {
   width: 100% !important;
 }
 

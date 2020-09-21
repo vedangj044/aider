@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./Home.module.css";
 import { withRouter } from "react-router-dom";
 import {
@@ -12,18 +12,14 @@ import {
   DialogTitle,
   DialogContent,
   Button,
-  DialogContentText,
   Tooltip,
   Menu,
   MenuItem,
   TextField,
   FormControl,
-  FormLabel,
-  FormControlLabel,
   Radio,
   RadioGroup,
 } from "@material-ui/core";
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import StorageIcon from "@material-ui/icons/Storage";
@@ -124,11 +120,10 @@ const QuestionsComponent = () => {
   const [qid, setQid] = useState(null);
 
   const getWidth = (index, i) => {
-    const total = questions[index].options.reduce(
-      (currentTotal, option) => currentTotal + option.votes,
-      0
-    );
-    const votes = questions[index].options[i].votes;
+    const total =
+      questions[index].option1.votes + questions[index].option2.votes;
+    const votes =
+      i === 1 ? questions[index].option1.votes : questions[index].option2.votes;
 
     return (votes / total) * 100;
   };
@@ -196,8 +191,8 @@ const QuestionsComponent = () => {
         return (
           <DialogComponent
             title="Add Question"
-            negative="Cancel"
-            positive="Submit"
+            negative={null}
+            positive={null}
             trigger={AddQuestionToDb}
             open={qOpen}
             handleClose={closeDialog}
@@ -242,7 +237,23 @@ const QuestionsComponent = () => {
                   <Card className={styles.questionCard}>
                     <h4>{question.question}</h4>
                     <div className={styles.options}>
-                      {question.options.map((option, i) => {
+                      <div className={styles.option}>
+                        <div
+                          className={styles.votingBar}
+                          style={{ width: `${getWidth(index, 1)}%` }}
+                        ></div>
+                        <p>{question.option1.name}</p>
+                        <p>{question.option1.votes}</p>
+                      </div>
+                      <div className={styles.option}>
+                        <div
+                          className={styles.votingBar}
+                          style={{ width: `${getWidth(index, 2)}%` }}
+                        ></div>
+                        <p>{question.option2.name}</p>
+                        <p>{question.option2.votes}</p>
+                      </div>
+                      {/* {question.options.map((option, i) => {
                         return (
                           <div key={i} className={styles.option}>
                             <div
@@ -253,7 +264,7 @@ const QuestionsComponent = () => {
                             <p>{option.votes}</p>
                           </div>
                         );
-                      })}
+                      })} */}
                     </div>
                     <h5>{question.answer}</h5>
                     <Tooltip placement="bottom" title="Delete Question">
@@ -311,21 +322,23 @@ const DialogComponent = ({
       <DialogContent className={styles.content}>
         {ContentComponent ? <ContentComponent /> : content}
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          {negative}
-        </Button>
-        <Button
-          onClick={() => {
-            handleClose();
-            trigger();
-          }}
-          color="primary"
-          autoFocus
-        >
-          {positive}
-        </Button>
-      </DialogActions>
+      {positive || negative ? (
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            {negative}
+          </Button>
+          <Button
+            onClick={() => {
+              handleClose();
+              trigger();
+            }}
+            color="primary"
+            autoFocus
+          >
+            {positive}
+          </Button>
+        </DialogActions>
+      ) : null}
     </Dialog>
   );
 };
@@ -334,9 +347,16 @@ const ContentForAddQuestion = () => {
   const [questiontoAdd, setQuestionToAdd] = useState("");
   const [option1, setOption1] = useState("option1");
   const [option2, setOption2] = useState("option2");
-  const [option3, setOption3] = useState("option3");
-  const [option4, setOption4] = useState("option4");
+  // const [option3, setOption3] = useState("option3");
+  // const [option4, setOption4] = useState("option4");
   const [answer, setAnswer] = useState(option1);
+
+  const { questions, setQuestions } = useContext(GlobalContext);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setQuestions([...questions, data]);
+  };
 
   const data = {
     id: uuidv4(),
@@ -350,24 +370,18 @@ const ContentForAddQuestion = () => {
         name: option2,
         votes: 0,
       },
-      {
-        name: option3,
-        votes: 0,
-      },
-      {
-        name: option4,
-        votes: 0,
-      },
     ],
     answer,
   };
 
-  const saveToLocal = () => {
-    localStorage.setItem("questions", JSON.stringify(data));
-  };
+  // const saveToLocal = useRef(
+  //   debounce(() => {
+  //     localStorage.setItem("questions", JSON.stringify(data));
+  //   }, 800)
+  // ).current;
 
   return (
-    <form className={styles.addQuestionForm}>
+    <form onSubmit={onSubmit} className={styles.addQuestionForm}>
       <TextField
         required
         className={styles.inputField}
@@ -376,7 +390,6 @@ const ContentForAddQuestion = () => {
         value={questiontoAdd}
         onChange={(e) => {
           setQuestionToAdd(e.target.value);
-          saveToLocal();
         }}
         variant="filled"
         label="Question"
@@ -392,11 +405,10 @@ const ContentForAddQuestion = () => {
           value={answer}
           onChange={(e) => {
             setAnswer(e.target.value);
-            saveToLocal();
           }}
         >
           <div className={styles.optionInput}>
-            <Radio value={option1} />
+            <Radio className={styles.radioBtn} value={option1} />
             <input
               className={styles.inputField}
               type="text"
@@ -404,14 +416,13 @@ const ContentForAddQuestion = () => {
               // value={option1}
               onChange={(e) => {
                 setOption1(e.target.value);
-                saveToLocal();
               }}
               variant="standard"
               placeholder="Enter Option 1"
             />
           </div>
           <div className={styles.optionInput}>
-            <Radio value={option2} />
+            <Radio className={styles.radioBtn} value={option2} />
             <input
               className={styles.inputField}
               type="text"
@@ -419,46 +430,21 @@ const ContentForAddQuestion = () => {
               // value={option2}
               onChange={(e) => {
                 setOption2(e.target.value);
-                saveToLocal();
               }}
               variant="standard"
               placeholder="Enter Option 2"
             />
           </div>
-          <div className={styles.optionInput}>
-            <Radio value={option3} />
-
-            <input
-              className={styles.inputField}
-              type="text"
-              size="small"
-              // value={option3}
-              onChange={(e) => {
-                setOption3(e.target.value);
-                saveToLocal();
-              }}
-              variant="standard"
-              placeholder="Enter Option 3"
-            />
-          </div>
-          <div className={styles.optionInput}>
-            <Radio value={option4} />
-
-            <input
-              className={styles.inputField}
-              type="text"
-              size="small"
-              // value={option4}
-              onChange={(e) => {
-                setOption4(e.target.value);
-                saveToLocal();
-              }}
-              variant="standard"
-              placeholder="Enter Option 4"
-            />
-          </div>
         </RadioGroup>
       </FormControl>
+      <div className={styles.actionBtn}>
+        <Button className={styles.action} variant="text">
+          Cancel
+        </Button>
+        <Button type="submit" className={styles.action} variant="text">
+          Submit
+        </Button>
+      </div>
     </form>
   );
 };
