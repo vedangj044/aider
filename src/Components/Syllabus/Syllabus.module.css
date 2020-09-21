@@ -1,1 +1,46 @@
-/* No CSS *//*# sourceMappingURL=Syllabus.module.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+:root {
+  --fixedWidth: 70%;
+  --primaryColor: #473bf0;
+}
+
+body {
+  background: rgba(245, 245, 245, 0.8);
+}
+
+.circularProgress svg {
+  color: var(--orangeTint) !important;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: var(--fixedWidth);
+  margin: auto;
+  min-height: 100vh;
+}
+
+.btn {
+  background: var(--primaryColor) !important;
+}
+
+.inputField,
+.fullWidth {
+  width: 100% !important;
+}
+/*# sourceMappingURL=Syllabus.module.css.map */

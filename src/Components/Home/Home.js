@@ -29,6 +29,7 @@ import classNames from "classnames";
 import { GlobalContext } from "../../Context/GlobalContext";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { v4 as uuidv4 } from "uuid";
+import { Syllabus, Data } from "../../Components";
 
 const Home = ({ history }) => {
   const CurrentComponent = () => {
@@ -36,9 +37,9 @@ const Home = ({ history }) => {
       case "/questions":
         return <QuestionsComponent />;
       case "/syllabus":
-        return <SyllabusComponent />;
+        return <Syllabus />;
       case "/data":
-        return <DataComponent />;
+        return <Data />;
       default:
         return <QuestionsComponent />;
     }
@@ -112,7 +113,12 @@ const Home = ({ history }) => {
 export default withRouter(Home);
 
 const QuestionsComponent = () => {
-  const { questions, setQuestions } = useContext(GlobalContext);
+  const {
+    questions,
+    setQuestions,
+    saveQuestionToDB,
+    deleteQuestionFromDB,
+  } = useContext(GlobalContext);
   const [open, setOpen] = useState(false);
   const [qid, setQid] = useState(null);
 
@@ -131,7 +137,9 @@ const QuestionsComponent = () => {
   };
 
   const DeleteQuestion = () => {
-    setQuestions(questions.filter((question) => question.id !== qid));
+    deleteQuestionFromDB(qid).then(() => {
+      setQuestions(questions.filter((question) => question.id !== qid));
+    });
     setQid(null);
   };
 
@@ -174,16 +182,35 @@ const QuestionsComponent = () => {
     const [option2, setOption2] = useState("option2");
     const [answer, setAnswer] = useState(option1);
 
-    const { questions, setQuestions } = useContext(GlobalContext);
+    const getID = () => {
+      let tempId = [];
+
+      if (!questions.some((question) => question.id === "story1"))
+        tempId.push(1);
+      if (!questions.some((question) => question.id === "story2"))
+        tempId.push(2);
+      if (!questions.some((question) => question.id === "story3"))
+        tempId.push(3);
+
+      if (tempId.length === 1) {
+        return tempId[0];
+      } else {
+        let lowest = tempId[0];
+        for (let i in tempId) {
+          if (tempId[i] <= lowest) lowest = tempId[i];
+        }
+        return lowest;
+      }
+    };
 
     const onSubmit = (e) => {
       e.preventDefault();
       setQuestions([data, ...questions]);
+      saveQuestionToDB(data, `story${getID()}`);
       closeDialog();
     };
 
     const data = {
-      id: uuidv4(),
       question: questiontoAdd,
       option1: {
         value: option1,
@@ -372,13 +399,13 @@ const QuestionsComponent = () => {
   );
 };
 
-const SyllabusComponent = () => {
-  return <div>Hello Syllabus</div>;
-};
+// const SyllabusComponent = () => {
+//   return <div>Hello Syllabus</div>;
+// };
 
-const DataComponent = () => {
-  return <div>Hello Data</div>;
-};
+// const DataComponent = () => {
+//   return <div>Hello Data</div>;
+// };
 
 const DialogComponent = ({
   open,
