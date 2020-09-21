@@ -9,6 +9,9 @@
     width: 100% !important;
     display: flex;
     justify-content: flex-end;
+    svg {
+      fill: rgba(108, 62, 192, 0.8);
+    }
   }
   .innerContainer {
     padding: 50px;

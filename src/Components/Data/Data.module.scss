@@ -1,0 +1,75 @@
+@import "../common.scss";
+
+.dataContainer {
+  width: 100%;
+  position: relative;
+  .appbar {
+    box-shadow: 0 10px 10px rgba(108, 62, 192, 0.08) !important;
+    z-index: 2 !important;
+  }
+  .topbar {
+    padding: 10px 50px;
+    background: white;
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 2 !important;
+    .importBtn {
+      color: rgba(108, 62, 192, 0.8);
+      svg {
+        margin-left: 10px;
+        fill: rgba(108, 62, 192, 0.8);
+      }
+    }
+    svg {
+      fill: rgba(108, 62, 192, 0.8);
+    }
+  }
+}
+.inputField {
+  margin: 10px 0 !important;
+  width: 100% !important;
+}
+.formControl {
+  margin: 0 0 20px 0 !important;
+  width: 100% !important;
+}
+.gre,
+.gate,
+.place {
+  padding: 50px;
+}
+.card {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 10px;
+  .nameAvatar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .name {
+      margin-left: 15px;
+      h5 {
+        font-size: 1rem;
+      }
+      p {
+        font-size: 0.8rem;
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+  .score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 0.9rem;
+    }
+    h2 {
+      color: rgba(108, 62, 192, 0.8);
+    }
+  }
+}

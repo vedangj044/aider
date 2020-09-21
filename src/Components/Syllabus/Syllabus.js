@@ -14,7 +14,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { FileDrop } from "react-file-drop";
 
 const Syllabus = () => {
-  const subjects = [""];
+  const subjects = ["Data Structures"];
   const branchs = ["CSE", "IT", "EI", "Mech", "Civil"];
   const years = [1, 2, 3, 4];
 
@@ -39,24 +39,6 @@ const Syllabus = () => {
         <Grid container spacing={4}>
           <Grid item md={4}>
             <FormControl className={styles.formControl}>
-              <InputLabel id="subject">Subject</InputLabel>
-              <Select
-                className={styles.inputSelect}
-                labelId="subject"
-                id="subject"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-              >
-                {subjects.map((sub) => (
-                  <MenuItem key={sub} value={sub}>
-                    {sub}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item md={4}>
-            <FormControl className={styles.formControl}>
               <InputLabel id="branch">Branch</InputLabel>
               <Select
                 className={styles.inputSelect}
@@ -68,6 +50,24 @@ const Syllabus = () => {
                 {branchs.map((br) => (
                   <MenuItem key={br} value={br}>
                     {br}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item md={4}>
+            <FormControl className={styles.formControl}>
+              <InputLabel id="subject">Subject</InputLabel>
+              <Select
+                className={styles.inputSelect}
+                labelId="subject"
+                id="subject"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+              >
+                {subjects.map((sub) => (
+                  <MenuItem key={sub} value={sub}>
+                    {sub}
                   </MenuItem>
                 ))}
               </Select>

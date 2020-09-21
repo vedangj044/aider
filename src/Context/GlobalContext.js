@@ -52,6 +52,9 @@ export const GlobalContextProvider = ({ children }) => {
   const [syllabus, setSyllabus] = useState([]);
   const [data, setData] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
+  const [gre, setGre] = useState([]);
+  const [gate, setGate] = useState([]);
+  const [placement, setPlacement] = useState([]);
 
   const saveQuestionToDB = async (question, id) => {
     await db
@@ -89,10 +92,23 @@ export const GlobalContextProvider = ({ children }) => {
       .then(() => console.log("Deleted"));
   };
 
+  const saveStatsToDB = async (stat, where) => {
+    await db
+      .ref(`statistics/${where}`)
+      .push(stat)
+      .then(() => {
+        console.log("success!");
+      });
+  };
+
   useEffect(() => {
     const fetchDb = async () => {
       const storiesRef = db.ref("poll");
       const announcementRef = db.ref("announcement");
+      const greRef = db.ref("statistics/gre");
+      const gateRef = db.ref("statistics/gate");
+      const placeRef = db.ref("statistics/placement");
+
       await storiesRef.on("value", (snap) => {
         let dbQuestions = snap.val();
         let temp = [];
@@ -112,8 +128,37 @@ export const GlobalContextProvider = ({ children }) => {
           annTemp.push({ id: `an${i + 1}`, msg: item })
         );
         setAnnouncements(annTemp, ...announcements);
+      });
+
+      await greRef.on("value", (snap) => {
+        let greScores = snap.val();
+        let temp = [];
+        for (let gScore in greScores) {
+          // setQuestions([dbQuestions[questions], ...questions]);
+          temp.push(greScores[gScore]);
+        }
+        setGre(temp, ...gre);
         console.log(temp);
-        console.log(annTemp);
+      });
+      await gateRef.on("value", (snap) => {
+        let gateScores = snap.val();
+        let temp = [];
+        for (let gateScore in gateScores) {
+          // setQuestions([dbQuestions[questions], ...questions]);
+          temp.push(gateScores[gateScore]);
+        }
+        setGate(temp, ...gate);
+        console.log(temp);
+      });
+      await placeRef.on("value", (snap) => {
+        let placeScores = snap.val();
+        let temp = [];
+        for (let placeScore in placeScores) {
+          // setQuestions([dbQuestions[questions], ...questions]);
+          temp.push(placeScores[placeScore]);
+        }
+        setPlacement(temp, ...placement);
+        console.log(temp);
       });
     };
     fetchDb();
@@ -134,6 +179,13 @@ export const GlobalContextProvider = ({ children }) => {
         setAnnouncements,
         saveAnnouncementToDB,
         deleteAnnouncementFromDB,
+        gre,
+        setGre,
+        gate,
+        setGate,
+        placement,
+        setPlacement,
+        saveStatsToDB,
       }}
     >
       {children}

@@ -60,6 +60,10 @@ body {
           justify-content: flex-end;
 }
 
+.syllabusContainer .topbar svg {
+  fill: rgba(108, 62, 192, 0.8);
+}
+
 .syllabusContainer .innerContainer {
   padding: 50px;
   width: 100%;

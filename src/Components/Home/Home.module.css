@@ -220,13 +220,17 @@ body {
           justify-content: flex-end;
 }
 
+.topbar svg {
+  fill: rgba(108, 62, 192, 0.8);
+}
+
 .questionCard {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -237,6 +241,7 @@ body {
   padding: 20px;
   position: relative;
   width: 100% !important;
+  min-height: 250px;
   -webkit-box-shadow: 2px 2px 5px rgba(108, 62, 192, 0.2) !important;
           box-shadow: 2px 2px 5px rgba(108, 62, 192, 0.2) !important;
 }

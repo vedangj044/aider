@@ -1,1 +1,159 @@
-/* No CSS *//*# sourceMappingURL=Data.module.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+:root {
+  --fixedWidth: 70%;
+  --primaryColor: #473bf0;
+}
+
+body {
+  background: rgba(245, 245, 245, 0.8);
+}
+
+.circularProgress svg {
+  color: var(--orangeTint) !important;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: var(--fixedWidth);
+  margin: auto;
+  min-height: 100vh;
+}
+
+.btn {
+  background: var(--primaryColor) !important;
+}
+
+.inputField,
+.fullWidth {
+  width: 100% !important;
+}
+
+.dataContainer {
+  width: 100%;
+  position: relative;
+}
+
+.dataContainer .appbar {
+  -webkit-box-shadow: 0 10px 10px rgba(108, 62, 192, 0.08) !important;
+          box-shadow: 0 10px 10px rgba(108, 62, 192, 0.08) !important;
+  z-index: 2 !important;
+}
+
+.dataContainer .topbar {
+  padding: 10px 50px;
+  background: white;
+  width: 100% !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  z-index: 2 !important;
+}
+
+.dataContainer .topbar .importBtn {
+  color: rgba(108, 62, 192, 0.8);
+}
+
+.dataContainer .topbar .importBtn svg {
+  margin-left: 10px;
+  fill: rgba(108, 62, 192, 0.8);
+}
+
+.dataContainer .topbar svg {
+  fill: rgba(108, 62, 192, 0.8);
+}
+
+.inputField {
+  margin: 10px 0 !important;
+  width: 100% !important;
+}
+
+.formControl {
+  margin: 0 0 20px 0 !important;
+  width: 100% !important;
+}
+
+.gre,
+.gate,
+.place {
+  padding: 50px;
+}
+
+.card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.card .nameAvatar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.card .nameAvatar .name {
+  margin-left: 15px;
+}
+
+.card .nameAvatar .name h5 {
+  font-size: 1rem;
+}
+
+.card .nameAvatar .name p {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.card .score {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card .score p {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.9rem;
+}
+
+.card .score h2 {
+  color: rgba(108, 62, 192, 0.8);
+}
+/*# sourceMappingURL=Data.module.css.map */
