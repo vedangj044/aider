@@ -6,6 +6,7 @@ from flaskthreads import AppContextThread
 from tokenizer import extractor, reader
 from findContent import getContent
 import pyrebase
+from storyMaker import generateStory
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = '/uploadsFlask'
@@ -82,7 +83,29 @@ def updateSyllabusToFirebase():
         outfile.write("\n".join(i for i in l))
     print("DONE!!")
 
+l = {}
+
+def stream_handler(message):
+    print(message["data"])
+    if message["event"] == "put":
+        if isinstance(message["data"], dict):
+            l.update(message["data"])
+        else:
+            path = message["path"].split("/")[1:]
+            l[path[0]][path[1]][path[2]] = message["data"]
+            if path[1] == "option1":
+                text = l[path[0]]["answer"].replace("____", str(message["data"]))
+                generateStory(text, path[0]+".png")
+                storage = firebase.storage()
+                storage.child("images/story.png").put(path[0]+".png")
+                print(storage.child("images/story.png").get_url(None))
+
+
 if __name__ == "__main__":
     db.create_all()
     firebase = pyrebase.initialize_app(configFirebase)
+
+    db = firebase.database()
+    my_stream = db.child("poll").stream(stream_handler)
+
     app.run(debug=True)

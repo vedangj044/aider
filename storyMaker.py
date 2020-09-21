@@ -126,8 +126,8 @@ def saveImage(name, imageObject, imageDraw, finalSymmetry, fillColor, fontChoice
 
     imageObject.save(name)
 
-def generateStory(text):
-    name = get_random_string()+".png"
+def generateStory(text, name_=""):
+    name = name_ if name_ != "" else get_random_string()+".png"
 
     list_of_words = text.split()
     combinations = filter(words(list_of_words))
@@ -152,4 +152,4 @@ def generateStory(text):
 
     return name
 
-generateStory("Infosys visits IET")
+# generateStory("IET Sport's day on 26/10/2020", "story1.png")
