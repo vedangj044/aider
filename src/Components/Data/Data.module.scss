@@ -73,3 +73,13 @@
     }
   }
 }
+.actionBtn {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 10px 0;
+
+  .action {
+    color: var(--primaryColor) !important;
+  }
+}

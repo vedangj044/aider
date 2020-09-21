@@ -59,7 +59,15 @@ const Data = () => {
   const [category, setCategory] = useState("");
   const branchs = ["CSE", "IT", "EI", "Mech", "Civil"];
 
-  const { gre, gate, placement } = useContext(GlobalContext);
+  const {
+    gre,
+    gate,
+    placement,
+    saveStatsToDB,
+    setGre,
+    setGate,
+    setPlacement,
+  } = useContext(GlobalContext);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -71,6 +79,27 @@ const Data = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      name,
+      branch,
+      score,
+      year,
+    };
+    if (category === "gre") {
+      saveStatsToDB(data, "gre");
+      setGre([data, ...gre]);
+    } else if (category === "gate") {
+      saveStatsToDB(data, "gate");
+      setGre([data, ...gate]);
+    } else if (category === "placement") {
+      saveStatsToDB(data, "placement");
+      setGre([data, ...placement]);
+    }
+    handleClose();
   };
 
   return (
@@ -111,7 +140,7 @@ const Data = () => {
             <div className={styles.gre}>
               {gre.map((item) => {
                 return (
-                  <Paper className={styles.card}>
+                  <Paper key={item.name} className={styles.card}>
                     <div className={styles.nameAvatar}>
                       <Avatar>{item.name.slice(0, 2)}</Avatar>
                       <div className={styles.name}>
@@ -135,7 +164,7 @@ const Data = () => {
             <div className={styles.gate}>
               {gate.map((item) => {
                 return (
-                  <Paper className={styles.card}>
+                  <Paper key={item.name} className={styles.card}>
                     <div className={styles.nameAvatar}>
                       <Avatar>{item.name.slice(0, 2)}</Avatar>
                       <div className={styles.name}>
@@ -158,7 +187,7 @@ const Data = () => {
           <TabPanel value={value} index={2}>
             <div className={styles.place}>
               {placement.map((item) => (
-                <Paper className={styles.card}>
+                <Paper key={item.name} className={styles.card}>
                   <div className={styles.nameAvatar}>
                     <Avatar>{item.name.slice(0, 2)}</Avatar>
                     <div className={styles.name}>
@@ -190,7 +219,7 @@ const Data = () => {
             Add Data
           </DialogTitle>
           <DialogContent className={styles.content}>
-            <form className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form}>
               <TextField
                 autoFocus
                 variant="outlined"
@@ -210,7 +239,7 @@ const Data = () => {
                 className={styles.inputField}
                 label="Year"
               />
-              <FormControl className={styles.formControl}>
+              <FormControl required className={styles.formControl}>
                 <InputLabel id="branch">Branch</InputLabel>
                 <Select
                   className={styles.inputSelect}
@@ -226,7 +255,7 @@ const Data = () => {
                   ))}
                 </Select>
               </FormControl>
-              <FormControl className={styles.formControl}>
+              <FormControl required className={styles.formControl}>
                 <InputLabel id="category">Category</InputLabel>
                 <Select
                   className={styles.inputSelect}
@@ -249,9 +278,21 @@ const Data = () => {
                 className={styles.inputField}
                 label="Score"
               />
+              <div className={styles.actionBtn}>
+                <Button
+                  className={styles.action}
+                  onClick={handleClose}
+                  variant="text"
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" className={styles.action} variant="text">
+                  Submit
+                </Button>
+              </div>
             </form>
           </DialogContent>
-          <DialogActions>
+          {/* <DialogActions>
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
@@ -264,7 +305,7 @@ const Data = () => {
             >
               Add
             </Button>
-          </DialogActions>
+          </DialogActions> */}
         </Dialog>
       </div>
     </div>

@@ -156,4 +156,19 @@ body {
 .card .score h2 {
   color: rgba(108, 62, 192, 0.8);
 }
+
+.actionBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.actionBtn .action {
+  color: var(--primaryColor) !important;
+}
 /*# sourceMappingURL=Data.module.css.map */
