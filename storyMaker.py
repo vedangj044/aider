@@ -8,9 +8,9 @@ from nltk.corpus import stopwords
 def getColorContrast():
 
     listOfBackgrounds = [
-        ("#512DA8", "#FFFFFF"),
+        ("#473BF0", "#FFFFFF"),
         ("#00796B", "#FFFFFF"),
-        ("#FFA000", "#212121"),
+        ("#FFB200", "#212121"),
         ("#455A64", "#FFFFFF"),
         ("#E64A19", "#FFFFFF")
     ]
@@ -113,12 +113,15 @@ def minimizeLowestWordSize(line, lowWords):
 
     return probableSymmetryComplement
 
-def saveImage(name, imageObject, imageDraw, finalSymmetry, fillColor, fontPath):
+def saveImage(name, imageObject, imageDraw, finalSymmetry, fillColor, fontChoice, highestWord):
     height = 700
     for i in finalSymmetry:
-        font = ImageFont.truetype(fontPath, i[1])
-        imageDraw.text((80, height), i[0], font=font, fill=fillColor, stroke_width=5)
-        size = imageDraw.textsize(i[0], font=font, stroke_width=5)
+        font = ImageFont.truetype(fontChoice[0], i[1])
+        if highestWord in i[0]:
+            font = ImageFont.truetype(fontChoice[1], i[1])
+
+        imageDraw.text((80, height), i[0], font=font, fill=fillColor, stroke_width=0)
+        size = imageDraw.textsize(i[0], font=font, stroke_width=0)
         height += size[1]
 
     imageObject.save(name)
@@ -133,17 +136,20 @@ def generateStory(text):
 
     img = Image.new('RGB', (1080, 1920), color = backgroudColor)
     imageObject = ImageDraw.Draw(img)
-    fontPath = 'Raleway-VariableFont_wght.ttf'
+    fontRegular = 'Montserrat-Regular.ttf'
+    fontBold = 'Montserrat-Bold.ttf'
 
-    line = fitEachLine(imageObject, combinations, fontPath)
+    line = fitEachLine(imageObject, combinations, fontRegular)
 
     lowWords, highWords = getHighLowWords(list_of_words)
 
     probableSymmetry = maximizeHighestWordSize(line, highWords)
     probableSymmetryComplement = minimizeLowestWordSize(probableSymmetry, lowWords)
 
-    saveImage(name, img, imageObject, probableSymmetryComplement[-1], fillColor, fontPath)
+    highestWord = max(highWords, key=len)
+    fontChoice = [fontRegular, fontBold]
+    saveImage(name, img, imageObject, probableSymmetryComplement[-1], fillColor, fontChoice, highestWord)
 
     return name
 
-# generateStory("INFOSYS visits IET")
+generateStory("Infosys visits IET")
