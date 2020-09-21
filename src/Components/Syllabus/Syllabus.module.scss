@@ -20,4 +20,24 @@
   .inputSelect {
     width: 100% !important;
   }
+  .uploadContainer {
+    display: grid;
+    place-items: center;
+    padding: 20px 0;
+    width: 100%;
+    min-height: 350px;
+    margin: 20px 0;
+    .upload {
+      display: grid;
+      place-items: center;
+      width: 100% !important;
+      height: 100%;
+      background: #e4e2f7c5;
+      border-radius: 5px;
+      font-weight: 800;
+      color: rgba(0, 0, 0, 0.4);
+      font-size: 2rem;
+      cursor: copy;
+    }
+  }
 }

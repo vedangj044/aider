@@ -11,6 +11,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { FileDrop } from "react-file-drop";
 
 const Syllabus = () => {
   const subjects = [""];
@@ -20,6 +21,9 @@ const Syllabus = () => {
   const [subject, setSubject] = useState("");
   const [branch, setBranch] = useState();
   const [year, setYear] = useState();
+  const [fileName, setFileName] = useState("");
+  const [files, setFiles] = useState([null]);
+  const [file, setFile] = useState(files[0]);
 
   return (
     <div className={styles.syllabusContainer}>
@@ -44,7 +48,9 @@ const Syllabus = () => {
                 onChange={(e) => setSubject(e.target.value)}
               >
                 {subjects.map((sub) => (
-                  <MenuItem value={sub}>{sub}</MenuItem>
+                  <MenuItem key={sub} value={sub}>
+                    {sub}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -60,7 +66,9 @@ const Syllabus = () => {
                 onChange={(e) => setBranch(e.target.value)}
               >
                 {branchs.map((br) => (
-                  <MenuItem value={br}>{br}</MenuItem>
+                  <MenuItem key={br} value={br}>
+                    {br}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -76,14 +84,30 @@ const Syllabus = () => {
                 onChange={(e) => setYear(e.target.value)}
               >
                 {years.map((yr) => (
-                  <MenuItem value={yr}>{yr}</MenuItem>
+                  <MenuItem key={yr} value={yr}>
+                    {yr}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Grid>
         </Grid>
 
-        <div className={styles.upload}></div>
+        <div className={styles.uploadContainer}>
+          <FileDrop
+            className={styles.upload}
+            onDrop={(files, event) => {
+              console.log("onDrop!", files, event);
+              setFileName(files[0].name);
+              setFiles(files);
+              setFile(files[0]);
+            }}
+          >
+            Upload File
+          </FileDrop>
+        </div>
+
+        <p>{fileName}</p>
       </div>
     </div>
   );
