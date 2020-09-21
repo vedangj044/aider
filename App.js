@@ -15,6 +15,7 @@ import Splash from "./src/screens/Splash";
 import Register from "./src/screens/Register";
 import Profile from "./src/screens/Profile";
 import AddFeed from "./src/screens/AddFeed";
+import Syllabus from "./src/screens/Syllabus";
 
 import firebase from "firebase";
 
@@ -38,6 +39,12 @@ const DrawerNavigator = createDrawerNavigator({
   },
   Profile: {
     screen: Profile,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Syllabus: {
+    screen: Syllabus,
     navigationOptions: {
       headerShown: false,
     },

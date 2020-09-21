@@ -26,6 +26,7 @@
     "react-native-stories-view": "^1.0.6",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-swipe-image": "^1.1.0",
+    "react-native-thumbnail-video": "^0.1.2",
     "react-native-vector-icons": "^7.1.0",
     "react-navigation": "^4.4.0",
     "react-navigation-drawer": "^2.5.0",
