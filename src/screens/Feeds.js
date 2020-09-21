@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import firebase from "firebase";
 import {
   Container,
@@ -53,36 +53,40 @@ export default class Feeds extends Component {
     }
 
     return (
-      <ScrollView>
-        <Container>
-          {data.map((item, i) => {
-            return (
-              <Card style={{ flex: 0 }} key={i}>
-                <CardItem>
-                  <Left>
-                    <Thumbnail source={{ uri: item.photo }} />
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: data.length * 100 }}
+        >
+          <Container>
+            {data.map((item, i) => {
+              return (
+                <Card style={{ flex: 0, padding: 10 }} key={i}>
+                  <CardItem>
+                    <Left>
+                      <Thumbnail source={{ uri: item.photo }} />
+                      <Body>
+                        <Text>{item.name}</Text>
+                        <Text style={{ color: "#D3D3D3" }}>15 April, 2200</Text>
+                      </Body>
+                    </Left>
+                  </CardItem>
+                  <CardItem>
                     <Body>
-                      <Text>{item.name}</Text>
-                      <Text style={{ color: "#D3D3D3" }}>15 April, 2200</Text>
+                      <Text>{item.feed}</Text>
                     </Body>
-                  </Left>
-                </CardItem>
-                <CardItem>
-                  <Body>
-                    <Text>{item.feed}</Text>
-                  </Body>
-                </CardItem>
-              </Card>
-            );
-          })}
-          <Icon
-            onPress={() => this.props.navigation.navigate("AddFeed")}
-            name="chat"
-            size={40}
-            style={styles.icon}
-          />
-        </Container>
-      </ScrollView>
+                  </CardItem>
+                </Card>
+              );
+            })}
+            <Icon
+              onPress={() => this.props.navigation.navigate("AddFeed")}
+              name="chat"
+              size={40}
+              style={styles.icon}
+            />
+          </Container>
+        </ScrollView>
+      </View>
     );
   }
 }

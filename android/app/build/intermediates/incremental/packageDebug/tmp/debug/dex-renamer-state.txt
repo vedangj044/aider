@@ -1,10 +1,13 @@
-#Mon Sep 21 09:30:47 IST 2020
-base.2=F\:\\MedicapsHack\\aider\\android\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+#Mon Sep 21 19:12:50 IST 2020
+path.3=classes.dex
 path.2=classes.dex
-base.1=C\:\\home\\friday\\aider\\android\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.1=classes.dex
-base.0=C\:\\home\\friday\\.gradle\\daemon\\6.2\\F\:\\MedicapsHack\\aider\\android\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+base.3=/home/friday/aider/android/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+base.2=/home/friday/.gradle/daemon/6.2/F\:\\MedicapsHack\\aider\\android\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+base.1=/home/friday/.gradle/daemon/6.2/C\:\\home\\friday\\aider\\android\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+base.0=/home/friday/.gradle/daemon/6.2/C\:\\home\\friday\\.gradle\\daemon\\6.2\\F\:\\MedicapsHack\\aider\\android\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-path.0=classes.dex
