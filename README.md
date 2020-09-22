@@ -20,7 +20,7 @@ Now we want to ask our seniors what is majorly asked in interviews, whether it i
 Imagine, Unfortunately, a student experiences some misbehavior by his fellow students, He can just add a post on Aider and tag college authorities.
 ##### Feauture 4 - Syllabus Generation
 While preparing for Exams, Viva, or interviews, A student uses the internet to look for topics, Aider saves him the trouble by providing him with the most relevant content curated according to his syllabus for all subjects in one place.
-College authorities will add a PDF of the syllabus once at the beginning of the college session, Aider automatically extracts all topics, looks for them on the internet, decides whether it should provide a youtube video or just a Wikipedia definition, and stores this is the database, A students can anytime use it as reference.
+College authorities will add a PDF of the syllabus once at the beginning of the college session, Aider automatically extracts all topics, looks for them on the internet, decides whether it should provide a youtube video or just a Wikipedia definition, and stores this is the database, A student can anytime use it as reference.
 #### Feature 5 - Connect with College Mates
 Students can write a bio about themselves, so next time when we need to make a team for participating in a hackathon and we are looking for a react developer, we can use Aider
 #### Feature 6 - Historic Data
@@ -34,6 +34,8 @@ Information like name and scores are displayed in the app regarding all the stud
 * Android app stories
 ![demo (8)](https://user-images.githubusercontent.com/43697446/93794203-6d09cd00-fc55-11ea-8550-b53663a25e64.jpg)
 
+### [Download APK](https://drive.google.com/file/d/16B_MkGY5rIwzS06Pna0AxA5sqxhKWdth/view?usp=drivesdk)
+
 
 ### How to install?
 This repo contains 3 branches, which have to be run individually
@@ -41,8 +43,8 @@ This repo contains 3 branches, which have to be run individually
 * App - This is the main react-native android application
 After installing react-native from [here](https://reactnative.dev/docs/0.61/getting-started)
 you can run the android app using
-`nmp install`
-`nmp start`
+`npm install`
+`npm start`
 
 * Console - console branch is the admin console built using react
 Installation instructions are the same as the app.
