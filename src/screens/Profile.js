@@ -90,7 +90,7 @@ export default class Profile extends Component {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#1eb8b8",
+    backgroundColor: "#3F51B5",
     height: 200,
   },
   avatar: {
@@ -124,8 +124,9 @@ const styles = StyleSheet.create({
   },
   info: {
     fontSize: 16,
-    color: "#1eb8b8",
-    marginTop: 10,
+    color: "blue",
+    marginTop: 8,
+    marginBottom: 10,
   },
   description: {
     fontSize: 16,
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainer: {
-    marginTop: 10,
+    marginTop: 30,
     height: 45,
     flexDirection: "row",
     justifyContent: "center",
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 250,
     borderRadius: 30,
-    backgroundColor: "#1eb8b8",
+    backgroundColor: "#3F51B5",
   },
   buttonFont: {
     color: "#FFFFFF",

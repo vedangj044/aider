@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import {
   View,
   StyleSheet,
@@ -21,24 +21,25 @@ import {
   Radio,
   Right,
 } from "native-base";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-export default class Feeds extends PureComponent {
+export default class Feeds extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
       loading: false,
       poll: [],
+      fetching: false,
     };
+    this._isMounted = true;
   }
 
-  componentDidMount() {
+  fetchPollData = () => {
     this.setState({ loading: true });
     var poll = [];
-    var feeds = [];
     firebase
       .database()
       .ref("poll")
@@ -52,9 +53,23 @@ export default class Feeds extends PureComponent {
           obj["option1"] = data[key]["option1"]["value"];
           obj["option2"] = data[key]["option2"]["value"];
           poll.push(obj);
+          this.setState({ poll });
         });
       });
+    this.setState({ loading: false });
+  };
 
+  sortByKey = (obj, key) => {
+    return obj.sort(function (a, b) {
+      var x = a[key];
+      var y = b[key];
+      return x > y ? -1 : x < y ? 1 : 0;
+    });
+  };
+
+  fetchFeedData = () => {
+    this.setState({ loading: true });
+    let feeds = [];
     firebase
       .database()
       .ref("Feeds/")
@@ -65,11 +80,34 @@ export default class Feeds extends PureComponent {
           obj["feed"] = data[key]["feed"];
           obj["photo"] = data[key]["photo"];
           obj["name"] = data[key]["name"];
+          obj["date"] = data[key]["date"];
+          obj["timestamp"] = data[key]["timestamp"];
+          obj["bio"] = data[key]["bio"];
+          obj["branch"] = data[key]["branch"];
+          obj["year"] = data[key]["year"];
+          obj["email"] = data[key]["email"];
+
           feeds.push(obj);
+          this.sortByKey(feeds, "timestamp");
+          if (this._isMounted) {
+            this.setState({ data: feeds });
+          }
         });
       });
+    this.setState({ loading: false });
+  };
 
-    this.setState({ data: feeds, loading: false, poll: poll });
+  componentDidMount() {
+    this._isMounted = true;
+
+    this.setState({ loading: true });
+    this.fetchPollData();
+    this.fetchFeedData();
+    this.setState({ loading: false });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   _renderItem = ({ item }) => {
@@ -154,7 +192,7 @@ export default class Feeds extends PureComponent {
               <Thumbnail source={{ uri: item.photo }} />
               <Body>
                 <Text>{item.name}</Text>
-                <Text style={{ color: "#D3D3D3" }}>15 April, 2200</Text>
+                <Text style={{ color: "#D3D3D3" }}>{item.date}</Text>
               </Body>
             </Left>
           </CardItem>
@@ -166,6 +204,12 @@ export default class Feeds extends PureComponent {
         </CardItem>
       </Card>
     );
+  };
+
+  onRefresh = () => {
+    this.setState({ fetching: true });
+    this.fetchFeedData();
+    this.setState({ fetching: false });
   };
 
   render() {
@@ -180,31 +224,32 @@ export default class Feeds extends PureComponent {
 
     return (
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <ScrollView
-          contentContainerStyle={{ paddingBottom: data.length * 100 }}
-        >
+        <View>
           <FlatList
             horizontal={true}
-            data={this.state.poll}
+            data={poll}
             extraData={this.state}
             renderItem={this._renderItem}
             keyExtractor={(item) => item.$t}
           />
-          <Container>
-            <FlatList
-              data={this.state.data}
-              extraData={this.state}
-              renderItem={this.renderData}
-              keyExtractor={(item) => item.$t}
-            />
-            <Icon
-              onPress={() => this.props.navigation.navigate("AddFeed")}
-              name="chat"
-              size={40}
-              style={styles.icon}
-            />
-          </Container>
-        </ScrollView>
+        </View>
+
+        <Container>
+          <FlatList
+            data={data}
+            extraData={this.state}
+            renderItem={this.renderData}
+            onRefresh={() => this.onRefresh()}
+            refreshing={this.state.fetching}
+            keyExtractor={(item) => item.$t}
+          />
+          <Icon
+            onPress={() => this.props.navigation.navigate("AddFeed")}
+            name="pluscircle"
+            size={50}
+            style={styles.icon}
+          />
+        </Container>
       </View>
     );
   }
@@ -219,7 +264,8 @@ const styles = StyleSheet.create({
 
   icon: {
     position: "absolute",
-    top: 350,
-    right: 40,
+    top: 325,
+    right: 35,
+    color: "#3F51B5",
   },
 });

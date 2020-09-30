@@ -23,6 +23,7 @@ export default class Home extends PureComponent {
         "https://firebasestorage.googleapis.com/v0/b/aarambh-aider.appspot.com/o/images%2Fstory3.png?alt=media",
       ],
       showImages: [],
+      to_show: {},
       loading: true,
     };
   }
@@ -36,9 +37,8 @@ export default class Home extends PureComponent {
       .ref("announcement")
       .on("value", (snapshot) => {
         res = snapshot.val();
-        Object.keys(res).map((key, index) => {
-          to_show[key] = 1;
-        });
+        let data = { ...res };
+        console.log(data);
       });
 
     firebase
@@ -48,25 +48,11 @@ export default class Home extends PureComponent {
         res = snapshot.val();
         Object.keys(res).map((key, index) => {
           to_show[key] = 1;
+          this.setState({ showImages: to_show });
         });
       });
-    var showImages = [];
-    if (to_show["an1"] === 1) {
-      showImages.push(this.state.images[0]);
-    }
-    if (to_show["an2"] === 1) {
-      showImages.push(this.state.images[1]);
-    }
-    if (to_show["story1"] === 1) {
-      showImages.push(this.state.images[2]);
-    }
-    if (to_show["story2"] === 1) {
-      showImages.push(this.state.images[3]);
-    }
-    if (to_show["story3"] === 1) {
-      showImages.push(this.state.images[4]);
-    }
-    this.setState({ showImages, loading: false });
+    this.setState({ loading: false });
+    console.log(this.state.showImages);
   }
 
   render() {
@@ -79,7 +65,7 @@ export default class Home extends PureComponent {
     return (
       <View style={styles.container}>
         <SliderBox
-          images={this.state.showImages}
+          images={this.state.images}
           sliderBoxHeight={Dimensions.get("window").height}
           dotColor="#fff"
           inactiveDotColor="#90A4AE"

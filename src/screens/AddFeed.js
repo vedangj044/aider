@@ -20,6 +20,10 @@ import { GoogleSignin } from "react-native-google-signin";
 import firebase from "firebase";
 
 export default class AddFeed extends Component {
+  static navigationOptions = {
+    title: "Add Feeds",
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -37,13 +41,11 @@ export default class AddFeed extends Component {
 
   getCurrentUser = async () => {
     const currentUser = await GoogleSignin.getCurrentUser();
-    console.log("User Info --> ", currentUser);
     this.setState({ userInfo: currentUser });
   };
 
   onYearChange = (year) => {
     this.setState({ year: year });
-    console.log(this.state.year);
   };
 
   onBranchChange = (branch) => {
@@ -59,11 +61,25 @@ export default class AddFeed extends Component {
   };
 
   addUserData = () => {
+    var months = [
+      "Jan",
+      "Feb",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
-    var date = dd + "/" + mm + "/" + yyyy;
+    var date = months[mm - 1] + " " + dd + ", " + yyyy;
 
     let feed = this.state.tweet;
     let bio = this.state.bio;
@@ -72,10 +88,11 @@ export default class AddFeed extends Component {
     let name = this.state.userInfo.user.name;
     let photo = this.state.userInfo.user.photo;
     let email = this.state.userInfo.user.email;
+    let timestamp = new Date().getTime();
     firebase
       .database()
       .ref("/Feeds")
-      .push({ name, photo, email, branch, year, bio, date, feed })
+      .push({ name, photo, email, branch, year, bio, date, feed, timestamp })
       .then((data) => console.log("User Data Pushed"))
       .catch((err) => console.log(err));
     this.props.navigation.navigate("Feeds");

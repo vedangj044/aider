@@ -8,6 +8,7 @@ MERGED from /home/friday/aider/android/app/src/main/AndroidManifest.xml:1:1-27:1
 MERGED from [com.facebook.flipper:flipper:0.37.0] /home/friday/.gradle/caches/transforms-2/files-2.1/cd24479b1ebca1a8254b8011ab4dc8b7/flipper-0.37.0/AndroidManifest.xml:8:1-18:12
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.37.0] /home/friday/.gradle/caches/transforms-2/files-2.1/0dc279d644d0e80e33abe6264728f166/flipper-network-plugin-0.37.0/AndroidManifest.xml:8:1-15:12
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.37.0] /home/friday/.gradle/caches/transforms-2/files-2.1/7d5a321ec409241182c4a6d83abfdfc0/flipper-fresco-plugin-0.37.0/AndroidManifest.xml:8:1-15:12
+MERGED from [androidx.multidex:multidex:2.0.0] /home/friday/.gradle/caches/transforms-2/files-2.1/94252117fc21c29574669eb38b1e75bb/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [:react-native-google-signin] /home/friday/aider/node_modules/react-native-google-signin/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-community_masked-view] /home/friday/aider/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-gesture-handler] /home/friday/aider/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
@@ -190,6 +191,8 @@ MERGED from [com.facebook.flipper:flipper-network-plugin:0.37.0] /home/friday/.g
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.37.0] /home/friday/.gradle/caches/transforms-2/files-2.1/0dc279d644d0e80e33abe6264728f166/flipper-network-plugin-0.37.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.37.0] /home/friday/.gradle/caches/transforms-2/files-2.1/7d5a321ec409241182c4a6d83abfdfc0/flipper-fresco-plugin-0.37.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.37.0] /home/friday/.gradle/caches/transforms-2/files-2.1/7d5a321ec409241182c4a6d83abfdfc0/flipper-fresco-plugin-0.37.0/AndroidManifest.xml:11:5-13:41
+MERGED from [androidx.multidex:multidex:2.0.0] /home/friday/.gradle/caches/transforms-2/files-2.1/94252117fc21c29574669eb38b1e75bb/multidex-2.0.0/AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.0] /home/friday/.gradle/caches/transforms-2/files-2.1/94252117fc21c29574669eb38b1e75bb/multidex-2.0.0/AndroidManifest.xml:20:5-43
 MERGED from [:react-native-google-signin] /home/friday/aider/node_modules/react-native-google-signin/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-google-signin] /home/friday/aider/node_modules/react-native-google-signin/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-community_masked-view] /home/friday/aider/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41

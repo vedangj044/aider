@@ -15,10 +15,15 @@ import {
 } from "native-base";
 import firebase from "firebase";
 import { Thumbnail } from "react-native-thumbnail-video";
+import { FlatList } from "react-native-gesture-handler";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 export default class Syllabus extends PureComponent {
+  static navigationOptions = {
+    title: "Syllabus",
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +35,10 @@ export default class Syllabus extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    this.setState({ done: false });
+  }
+
   fetchData = () => {
     this.setState({ loading: true });
     var res = [];
@@ -38,7 +47,7 @@ export default class Syllabus extends PureComponent {
       .ref(
         `syllabus/${this.state.year}/${this.state.branch}/${this.state.subject}/`
       )
-      .on("value", (snapshot) => {
+      .once("value", (snapshot) => {
         var Data = snapshot.val();
         Object.keys(Data).map((key, index) => {
           let obj = {};
@@ -47,10 +56,9 @@ export default class Syllabus extends PureComponent {
           obj["topic"] = Data[key]["topic"];
           res.push(obj);
         });
+        this.setState({ data: res });
       });
-    var slice_res = res.slice(0, 10);
-    this.setState({ data: slice_res, loading: false });
-    console.log(this.state.data);
+    this.setState({ loading: false });
   };
 
   onYearChange = (year) => {
@@ -65,8 +73,45 @@ export default class Syllabus extends PureComponent {
     this.setState({ subject });
   };
 
+  _renderItem = ({ item }) => {
+    return (
+      <Content padder>
+        {this.state.data.map((item, i) => {
+          return (
+            <Card key={i}>
+              <CardItem header bordered>
+                <Text
+                  style={{
+                    fontWeight: "700",
+                    fontSize: 15,
+                    textAlign: "center",
+                  }}
+                  Component
+                >
+                  {item.topic}
+                </Text>
+              </CardItem>
+              {item.isVideo === true ? (
+                <Thumbnail
+                  url={item.summary}
+                  imageHeight={175}
+                  imageWidth={Dimensions.get("window").width * 0.93}
+                />
+              ) : (
+                <CardItem>
+                  <Text style={{ minHeight: 200 }}>{item.summary}</Text>
+                </CardItem>
+              )}
+            </Card>
+          );
+        })}
+      </Content>
+    );
+  };
+
   render() {
-    if (this.state.loading) {
+    const { loading, data, subject } = this.state;
+    if (loading) {
       return (
         <Container>
           <Content>
@@ -172,53 +217,30 @@ export default class Syllabus extends PureComponent {
         </Container>
       );
     }
-    console.log(this.state.data);
+
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
-          <Container style={{ minHeight: 4.2 * SCREEN_HEIGHT }}>
-            <Text
-              style={{
-                fontFamily: "sans-serif",
-                fontSize: 21,
-                textAlign: "center",
-                marginTop: 10,
-              }}
-            >
-              {this.state.subject}
-            </Text>
-            <Content padder>
-              {this.state.data.map((item, i) => {
-                return (
-                  <Card key={i}>
-                    <CardItem header bordered>
-                      <Text
-                        style={{
-                          fontWeight: "700",
-                          fontSize: 15,
-                          textAlign: "center",
-                        }}
-                      >
-                        {item.topic}
-                      </Text>
-                    </CardItem>
-                    {item.isVideo === true ? (
-                      <Thumbnail
-                        url={item.summary}
-                        imageHeight={175}
-                        imageWidth={Dimensions.get("window").width * 0.93}
-                      />
-                    ) : (
-                      <CardItem>
-                        <Text style={{ minHeight: 200 }}>{item.summary}</Text>
-                      </CardItem>
-                    )}
-                  </Card>
-                );
-              })}
-            </Content>
-          </Container>
-        </ScrollView>
+      <View style={{ flex: 1 }}>
+        <Container>
+          <Text
+            style={{
+              fontFamily: "sans-serif",
+              fontSize: 21,
+              textAlign: "center",
+              marginTop: 10,
+              fontWeight: "bold",
+              fontFamily: "Arial",
+            }}
+          >
+            {subject}
+          </Text>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.$t}
+            renderItem={this._renderItem}
+            windowSize={10}
+            initialNumToRender={3}
+          />
+        </Container>
       </View>
     );
   }

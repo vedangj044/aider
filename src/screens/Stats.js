@@ -52,10 +52,10 @@ export default class Stats extends Component {
           obj["name"] = data[key]["name"];
           obj["branch"] = data[key]["branch"];
           res.push(obj);
+          this.setState({ calls: res });
         });
       });
-    this.setState({ calls: res, loading: false });
-    console.log(res);
+    this.setState({ loading: false });
   };
   gate = async () => {
     var res = [];
@@ -71,10 +71,10 @@ export default class Stats extends Component {
           obj["name"] = data[key]["name"];
           obj["branch"] = data[key]["branch"];
           res.push(obj);
+          this.setState({ calls: res });
         });
       });
-    this.setState({ calls: res, loading: false });
-    console.log(res);
+    this.setState({ loading: false });
   };
   placement = async () => {
     var res = [];
@@ -90,10 +90,10 @@ export default class Stats extends Component {
           obj["name"] = data[key]["name"];
           obj["branch"] = data[key]["branch"];
           res.push(obj);
+          this.setState({ calls: res });
         });
       });
-    this.setState({ calls: res, loading: false });
-    console.log(res);
+    this.setState({ loading: false });
   };
 
   renderItem = ({ item }) => {
@@ -103,7 +103,7 @@ export default class Stats extends Component {
           <Image
             source={{
               uri:
-                "https://www.dreamstime.com/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-image176194876",
+                "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
             }}
             style={styles.pic}
           />
@@ -145,13 +145,13 @@ export default class Stats extends Component {
         <Footer>
           <FooterTab style={{ color: "#1eb8b8" }}>
             <Button active onPress={this.gre}>
-              <Text>GRE</Text>
+              <Text style={styles.data}>GRE</Text>
             </Button>
             <Button onPress={this.gate}>
-              <Text>Gate</Text>
+              <Text style={styles.data}>Gate</Text>
             </Button>
             <Button onPress={this.placement}>
-              <Text>Placement</Text>
+              <Text style={styles.data}>Placement</Text>
             </Button>
           </FooterTab>
         </Footer>
@@ -200,5 +200,11 @@ const styles = StyleSheet.create({
     color: "#777",
     fontSize: 12,
     marginLeft: 15,
+  },
+  data: {
+    fontSize: 14,
+    color: "#fff",
+    fontFamily: "Arial",
+    fontWeight: "bold",
   },
 });

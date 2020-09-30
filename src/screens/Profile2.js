@@ -30,10 +30,8 @@ export default class Profile extends Component {
       .on("value", function (snapshot) {
         data = snapshot.val();
       });
-    console.log(data);
-    console.log(data.email);
+
     this.setState({ data: data });
-    console.log("Hello");
   };
 
   render() {
@@ -42,9 +40,13 @@ export default class Profile extends Component {
     const photo = this.props.navigation.getParam("photo", "photo");
     const bio = this.props.navigation.getParam("bio", "Django Developer");
     const branch = this.props.navigation.getParam("branch", "IT");
-    const year = this.props.navigation.getParam("year", "2nd");
 
-    console.log(name, email, photo);
+    var year = this.props.navigation.getParam("year", 1);
+    if (year == 1) year = "First Year";
+    else if (year == 2) year = "Second Year";
+    else if (year == 3) year = "Third Year";
+    else year = "Fourth Year";
+
     return this.state.userInfo == null ? (
       <View style={styles.container}></View>
     ) : (
@@ -54,10 +56,13 @@ export default class Profile extends Component {
         <View style={styles.body}>
           <View style={styles.bodyContent}>
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.info}>Django Developer</Text>
+            <Text style={styles.email}>@{email}</Text>
 
-            <Text style={styles.info}>IT 3rd year</Text>
-            {/* <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text> */}
+            <Text style={styles.info}>{bio}</Text>
+
+            <Text style={styles.info}>
+              {year} {branch}
+            </Text>
 
             <TouchableOpacity style={styles.buttonContainer}>
               <Text style={styles.buttonFont}>Feeds by</Text>
@@ -74,7 +79,7 @@ export default class Profile extends Component {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#1eb8b8",
+    backgroundColor: "#3F51B5",
     height: 200,
   },
   avatar: {
@@ -93,6 +98,11 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontWeight: "600",
   },
+  email: {
+    fontSize: 11,
+    color: "blue",
+    fontWeight: "400",
+  },
   body: {
     marginTop: 40,
   },
@@ -108,7 +118,7 @@ const styles = StyleSheet.create({
   },
   info: {
     fontSize: 16,
-    color: "#1eb8b8",
+    color: "#3F51B5",
     marginTop: 10,
   },
   description: {
@@ -118,15 +128,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainer: {
-    marginTop: 10,
+    marginTop: 30,
     height: 45,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 10,
     width: 250,
     borderRadius: 30,
-    backgroundColor: "#1eb8b8",
+    backgroundColor: "#3F51B5",
   },
   buttonFont: {
     color: "#FFFFFF",
