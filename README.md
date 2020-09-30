@@ -1,6 +1,6 @@
 # Aider
 ##### Stay Informed & Organized with Aider
-
+ 
 Aider means to help. Aider is an Android application built with student's needs in mind. 
 This app is neither a management portal,not an attendance app. This is much more. Aider informs the students about the ongoing of the college in 50 seconds, it also helps students raise an issue and ask for their opinion, it automatically curates content relevant to students syllabus thus helping them study, it records historic data about students who clear GATE, GRE, CAT or get good placements.
 
