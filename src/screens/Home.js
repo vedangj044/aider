@@ -1,17 +1,10 @@
-import React, { PureComponent } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-  Button,
-} from "react-native";
+import React, { Component } from "react";
+import { Text, View, StyleSheet, Dimensions } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import Icon from "react-native-vector-icons/AntDesign";
 import firebase from "firebase";
 
-export default class Home extends PureComponent {
+export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {

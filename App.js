@@ -9,7 +9,6 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 // importing screens
-import Home from "./src/screens/Home";
 import Feeds from "./src/screens/Feeds";
 import Splash from "./src/screens/Splash";
 import Register from "./src/screens/Register";
@@ -18,6 +17,7 @@ import AddFeed from "./src/screens/AddFeed";
 import Syllabus from "./src/screens/Syllabus";
 import Profile2 from "./src/screens/Profile2";
 import Stats from "./src/screens/Stats";
+import Home from "./src/screens/Home";
 
 import firebase from "firebase";
 

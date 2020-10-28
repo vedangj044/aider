@@ -72,6 +72,13 @@ export default class Syllabus extends PureComponent {
   };
 
   _renderItem = ({ item }) => {
+    if (
+      item == undefined ||
+      this.state.data.length == 0 ||
+      this.state.data == ""
+    ) {
+      return <Text>No data available yet</Text>;
+    }
     return (
       <Content padder>
         <Card key={i}>
