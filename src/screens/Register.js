@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -18,7 +18,8 @@ export default class Auth extends Component {
 
   componentDidMount() {
     GoogleSignin.configure({
-      webClientId: '297471107724-0p0b9gb59k7sh3kem58j3hhkcj8cgsjd.apps.googleusercontent.com',
+      webClientId:
+        "297471107724-0p0b9gb59k7sh3kem58j3hhkcj8cgsjd.apps.googleusercontent.com",
     });
   }
 

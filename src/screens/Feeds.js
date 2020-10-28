@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   View,
   StyleSheet,
-  ScrollView,
   FlatList,
   Dimensions,
   TouchableOpacity,
@@ -10,7 +9,6 @@ import {
 import firebase from "firebase";
 import {
   Container,
-  Content,
   Card,
   CardItem,
   Thumbnail,
@@ -18,12 +16,10 @@ import {
   Left,
   Body,
   Button,
-  Radio,
-  Right,
 } from "native-base";
 import Icon from "react-native-vector-icons/AntDesign";
 
-const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_HEIGHT = Dimensions.get("window").height - 150;
 
 export default class Feeds extends Component {
   constructor(props) {
@@ -264,7 +260,7 @@ const styles = StyleSheet.create({
 
   icon: {
     position: "absolute",
-    top: 325,
+    top: SCREEN_HEIGHT,
     right: 35,
     color: "#3F51B5",
   },

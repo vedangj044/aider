@@ -21,7 +21,6 @@ export default class Profile extends Component {
 
   getCurrentUser = async () => {
     const currentUser = await GoogleSignin.getCurrentUser();
-    console.log("User Info --> ", currentUser);
     this.setState({ userInfo: currentUser });
     var data = [];
     firebase
