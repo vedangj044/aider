@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
-import { View, Text, ScrollView, Dimensions } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import {
   Container,
-  Header,
   Content,
   Icon,
   Picker,
@@ -14,8 +13,6 @@ import {
 import firebase from "firebase";
 import { Thumbnail } from "react-native-thumbnail-video";
 import { FlatList } from "react-native-gesture-handler";
-
-const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 export default class Syllabus extends PureComponent {
   static navigationOptions = {
@@ -234,6 +231,29 @@ export default class Syllabus extends PureComponent {
           >
             {subject}
           </Text>
+          <Button
+            full
+            primary
+            block
+            onPress={() => this.setState({ data: [], loading: true })}
+            style={{
+              marginLeft: 10,
+              marginRight: 10,
+              marginTop: 10,
+              marginBottom: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 18,
+                fontFamily: "Arial",
+                color: "#fff",
+              }}
+            >
+              Clear
+            </Text>
+          </Button>
           <FlatList
             data={data}
             keyExtractor={(item) => item.$t}
