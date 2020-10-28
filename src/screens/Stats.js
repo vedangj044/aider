@@ -18,7 +18,6 @@ import {
   FlatList,
 } from "react-native";
 import firebase from "firebase";
-import { GoogleSignin } from "react-native-google-signin";
 
 export default class Stats extends Component {
   static navigationOptions = {
@@ -35,7 +34,6 @@ export default class Stats extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    console.log(this.state.tab);
     this.gre();
   }
   gre = async () => {
@@ -131,7 +129,6 @@ export default class Stats extends Component {
   };
 
   render() {
-    console.log(this.state.calls);
     return (
       <Container>
         <FlatList

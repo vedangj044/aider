@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import {
   Container,
-  Header,
   Content,
   Item,
   Input,
   Thumbnail,
-  Textarea,
   Card,
   CardItem,
   Left,

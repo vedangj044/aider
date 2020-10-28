@@ -21,7 +21,6 @@ export default class Profile extends Component {
 
   getCurrentUser = async () => {
     const currentUser = await GoogleSignin.getCurrentUser();
-    console.log("User Info --> ", currentUser);
     this.setState({ userInfo: currentUser });
     var data = [];
     firebase
@@ -30,10 +29,7 @@ export default class Profile extends Component {
       .on("value", function (snapshot) {
         data = snapshot.val();
       });
-    console.log(data);
-    console.log(data.email);
     this.setState({ data: data });
-    console.log("Hello");
   };
 
   render() {
