@@ -38,7 +38,6 @@ export default class Home extends PureComponent {
       .on("value", (snapshot) => {
         res = snapshot.val();
         let data = { ...res };
-        console.log(data);
       });
 
     firebase
@@ -52,7 +51,6 @@ export default class Home extends PureComponent {
         });
       });
     this.setState({ loading: false });
-    console.log(this.state.showImages);
   }
 
   render() {

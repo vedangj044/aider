@@ -10,8 +10,6 @@ import {
   Button,
   Card,
   CardItem,
-  Body,
-  Accordion,
 } from "native-base";
 import firebase from "firebase";
 import { Thumbnail } from "react-native-thumbnail-video";
@@ -76,35 +74,31 @@ export default class Syllabus extends PureComponent {
   _renderItem = ({ item }) => {
     return (
       <Content padder>
-        {this.state.data.map((item, i) => {
-          return (
-            <Card key={i}>
-              <CardItem header bordered>
-                <Text
-                  style={{
-                    fontWeight: "700",
-                    fontSize: 15,
-                    textAlign: "center",
-                  }}
-                  Component
-                >
-                  {item.topic}
-                </Text>
-              </CardItem>
-              {item.isVideo === true ? (
-                <Thumbnail
-                  url={item.summary}
-                  imageHeight={175}
-                  imageWidth={Dimensions.get("window").width * 0.93}
-                />
-              ) : (
-                <CardItem>
-                  <Text style={{ minHeight: 200 }}>{item.summary}</Text>
-                </CardItem>
-              )}
-            </Card>
-          );
-        })}
+        <Card key={i}>
+          <CardItem header bordered>
+            <Text
+              style={{
+                fontWeight: "700",
+                fontSize: 15,
+                textAlign: "center",
+              }}
+              Component
+            >
+              {item.topic}
+            </Text>
+          </CardItem>
+          {item.isVideo === true ? (
+            <Thumbnail
+              url={item.summary}
+              imageHeight={175}
+              imageWidth={Dimensions.get("window").width * 0.93}
+            />
+          ) : (
+            <CardItem>
+              <Text style={{ minHeight: 200 }}>{item.summary}</Text>
+            </CardItem>
+          )}
+        </Card>
       </Content>
     );
   };

@@ -18,16 +18,7 @@ import AddFeed from "./src/screens/AddFeed";
 import Syllabus from "./src/screens/Syllabus";
 import Profile2 from "./src/screens/Profile2";
 import Stats from "./src/screens/Stats";
-import { YellowBox } from "react-native";
-import _ from "lodash";
 
-YellowBox.ignoreWarnings(["Setting a timer"]);
-const _console = _.clone(console);
-console.warn = (message) => {
-  if (message.indexOf("Setting a timer") <= -1) {
-    _console.warn(message);
-  }
-};
 import firebase from "firebase";
 
 var config = {
